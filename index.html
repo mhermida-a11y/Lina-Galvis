@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio Lina Galvis Mercado Saludable · Fithub</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--or:#EC6412;--or-l:#fdf0e8;--or-d:#c44f0a;--gn:#2D593B;--gn-l:#eaf3ed;--gn-d:#1e3d28;--lv:#C2BFE1;--yw:#F7EE7E;--yw-d:#d4c93a;--wh:#fff;--cr:#FAFAF5;--tx:#1a1a1a;--mu:#6b7280;--bd:#e5e7eb}
+body{font-family:'Montserrat',sans-serif;background:var(--cr);color:var(--tx);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hdr{background:var(--gn);color:#fff;padding:28px 40px 22px;position:relative;overflow:hidden}
+.hdr::after{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-box{width:36px;height:36px;background:var(--or);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-box svg{width:20px;height:20px;fill:#fff}
+.logo-name{font-size:14px;font-weight:800;color:#fff;letter-spacing:.1em;text-transform:uppercase}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px}
+.hdr-badge{background:var(--or);color:#fff;font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:.07em;text-transform:uppercase}
+.hdr-eye{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.hdr-name{font-size:21px;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.1}
+.hdr-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:500;color:rgba(255,255,255,.8)}
+.hdr-line{height:1px;background:rgba(255,255,255,.12);margin-bottom:14px}
+.hdr-stats{display:flex;flex-wrap:wrap;gap:20px}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat-v{font-size:16px;font-weight:700;color:#fff}
+.stat-l{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.stat-sep{width:1px;background:rgba(255,255,255,.12);align-self:stretch}
+.nav{background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;gap:2px;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-a{padding:11px 12px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mu);white-space:nowrap;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;text-decoration:none;flex-shrink:0}
+.nav-cnt{font-weight:400;opacity:.6}
+.nav-a:hover,.nav-a.on{color:var(--or);border-bottom-color:var(--or)}
+.main{max-width:1200px;margin:0 auto;padding:24px 40px 140px}
+.top-actions{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
+.obar{flex:1;background:var(--yw);border:1px solid var(--yw-d);border-radius:12px;padding:13px 20px;display:flex;align-items:center;gap:12px}
+.obar-txt{font-size:12px;font-weight:600;color:var(--gn-d)}
+.obar-val{margin-left:auto;font-size:15px;font-weight:800;color:var(--gn-d)}
+.btn-dl-all{background:var(--gn);color:#fff;border:none;border-radius:12px;padding:13px 18px;font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;transition:background .15s}
+.btn-dl-all:hover{background:var(--gn-d)}
+.fam-group{margin-bottom:36px}
+.fam-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gn);padding:8px 0 8px 12px;border-left:4px solid var(--or);margin-bottom:18px}
+.fam-cnt{font-weight:400;opacity:.5;font-size:11px}
+.sec{margin-bottom:28px}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sec-ico{width:28px;height:28px;border-radius:8px;background:var(--or-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sec-title{font-size:14px;font-weight:700;color:var(--tx)}
+.sec-line{flex:1;height:1px;background:var(--bd)}
+.sec-cnt{font-size:11px;font-weight:600;color:var(--mu);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:11px}
+.card{background:#fff;border-radius:12px;overflow:hidden;border:1.5px solid var(--bd);cursor:pointer;display:flex;flex-direction:column;position:relative;transition:transform .15s,box-shadow .15s,border-color .12s}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.09)}
+.card.selected{border-color:var(--or);box-shadow:0 0 0 3px rgba(236,100,18,.15)}
+.card-img{width:100%;aspect-ratio:1;background:var(--cr);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px;position:relative}
+.card-img img{width:100%;height:100%;object-fit:contain;border-radius:4px}
+.chk{position:absolute;top:7px;left:7px;width:20px;height:20px;background:var(--or);color:#fff;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:11px;font-weight:800;z-index:2}
+.card.selected .chk{display:flex}
+.sel-hint{position:absolute;bottom:0;left:0;right:0;background:var(--or);color:#fff;font-size:9px;font-weight:700;text-align:center;padding:3px;opacity:0;transition:opacity .15s}
+.card:hover .sel-hint,.card.selected .sel-hint{opacity:1}
+.card.selected .sel-hint{background:var(--gn)}
+.no-img{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:.2}
+.no-img svg{width:22px;height:22px}
+.no-img span{font-size:8px;font-weight:600;text-transform:uppercase}
+.card-body{padding:9px 11px 20px;flex:1;display:flex;flex-direction:column;border-top:1px solid var(--bd)}
+.cb-brand{font-size:8px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--or);margin-bottom:3px}
+.cb-name{font-size:10.5px;font-weight:600;color:var(--tx);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:28px;flex:1}
+.cb-foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:8px;gap:4px}
+.price-l{font-size:7px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mu);display:block;margin-bottom:1px}
+.price-v{font-size:13px;font-weight:800;color:var(--tx)}
+.card-link{font-size:8px;font-weight:700;color:var(--gn);text-decoration:none;padding:3px 6px;border-radius:5px;background:var(--gn-l);border:1px solid #c5ddc9;white-space:nowrap;flex-shrink:0}
+.card-link:hover{background:var(--gn);color:#fff}
+.sel-bar{position:fixed;bottom:0;left:0;right:0;background:var(--gn-d);color:#fff;padding:14px 40px;display:flex;align-items:center;gap:16px;z-index:300;transform:translateY(100%);transition:transform .25s ease;box-shadow:0 -4px 24px rgba(0,0,0,.25)}
+.sel-bar.visible{transform:translateY(0)}
+.sel-bar-info{display:flex;flex-direction:column;gap:2px}
+.sel-bar-count{font-size:13px;font-weight:700}
+.sel-bar-total{font-size:11px;color:rgba(255,255,255,.6)}
+.sel-bar-btns{margin-left:auto;display:flex;gap:10px;align-items:center}
+.btn-clear{padding:8px 16px;font-size:12px;font-weight:600;border-radius:8px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer;font-family:'Montserrat',sans-serif}
+.btn-clear:hover{background:rgba(255,255,255,.1)}
+.btn-excel{padding:10px 20px;font-size:12px;font-weight:700;border-radius:10px;border:none;background:var(--or);color:#fff;cursor:pointer;font-family:'Montserrat',sans-serif;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.btn-excel:hover{background:var(--or-d)}
+@media(max-width:580px){
+  .hdr,.main{padding:18px 16px}
+  .nav-inner{padding:0 12px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .stat-sep{display:none}
+  .top-actions{flex-direction:column}
+  .obar{width:100%}
+  .sel-bar{padding:12px 16px;flex-wrap:wrap;gap:10px}
+  .sel-bar-btns{margin-left:0;width:100%}
+  .btn-excel{flex:1;justify-content:center}
+}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr-top">
+    <div class="logo">
+      <div class="logo-box"><svg viewBox="0 0 20 20"><path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 9.5c-2.5 0-4.7-1.3-6-3.2.03-2 4-3.1 6-3.1 1.99 0 5.97 1.1 6 3.1-1.3 1.9-3.5 3.2-6 3.2z"/></svg></div>
+      <div><div class="logo-name">Fithub</div><div class="logo-sub">Canal Institucional</div></div>
+    </div>
+    <span class="hdr-badge">Portafolio B2B</span>
+  </div>
+  <div class="hdr-eye">Preparado especialmente para</div>
+  <div class="hdr-name">Lina Galvis Mercado Saludable</div>
+  <div class="hdr-pills">
+    <span class="pill">NIT: 1073321568-5</span>
+    <span class="pill">Mercado / Minimercado</span>
+    <span class="pill">Caldas, Colombia</span>
+    <span class="pill">Venta al por menor / Retail</span>
+  </div>
+  <div class="hdr-line"></div>
+  <div class="hdr-stats">
+    <div class="stat"><span class="stat-v">522</span><span class="stat-l">Referencias</span></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><span class="stat-v">61</span><span class="stat-l">Categorías</span></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><span class="stat-v">$2.000.000</span><span class="stat-l">Pedido mínimo</span></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><span class="stat-v">Jun 2026</span><span class="stat-l">Generado</span></div>
+  </div>
+</header>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+<a class="nav-a" href="#fam-despensa">Despensa <span class="nav-cnt">(265)</span></a>
+<a class="nav-a" href="#fam-bebidas">Bebidas <span class="nav-cnt">(32)</span></a>
+<a class="nav-a" href="#fam-snacksypasabocas">Snacks y Pasabocas <span class="nav-cnt">(38)</span></a>
+<a class="nav-a" href="#fam-lacteosyrefrigerados">Lácteos y Refrigerados <span class="nav-cnt">(23)</span></a>
+<a class="nav-a" href="#fam-congelados">Congelados <span class="nav-cnt">(38)</span></a>
+<a class="nav-a" href="#fam-carnicos">Cárnicos <span class="nav-cnt">(20)</span></a>
+<a class="nav-a" href="#fam-suplementosysalud">Suplementos y Salud <span class="nav-cnt">(105)</span></a>
+<a class="nav-a" href="#fam-panaderia">Panadería <span class="nav-cnt">(1)</span></a>
+  </div>
+</nav>
+<main class="main">
+  <div class="top-actions">
+    <div class="obar">
+      <span style="font-size:18px">📋</span>
+      <span class="obar-txt">Pedido mínimo · Lina Galvis Mercado Saludable</span>
+      <span class="obar-val">$2.000.000 COP</span>
+    </div>
+    <button class="btn-dl-all" onclick="descargarTodo()">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Descargar portafolio completo en Excel
+    </button>
+  </div>
+
+  <div class="fam-group" id="fam-despensa">
+    <div class="fam-title">Despensa <span class="fam-cnt">(265)</span></div>
+    
+    <section class="sec" id="cat-aceites">
+      <div class="sec-head">
+        <div class="sec-ico">🫒</div>
+        <div><div class="sec-title">Aceites</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">9 SKUs</span>
+      </div>
+      <div class="grid" id="g-aceites"></div>
+    </section>
+    <section class="sec" id="cat-arrocesgranosysemillas">
+      <div class="sec-head">
+        <div class="sec-ico">🌾</div>
+        <div><div class="sec-title">Arroces, Granos y Semillas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">14 SKUs</span>
+      </div>
+      <div class="grid" id="g-arrocesgranosysemillas"></div>
+    </section>
+    <section class="sec" id="cat-avena">
+      <div class="sec-head">
+        <div class="sec-ico">🥣</div>
+        <div><div class="sec-title">Avena</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">1 SKUs</span>
+      </div>
+      <div class="grid" id="g-avena"></div>
+    </section>
+    <section class="sec" id="cat-cafe">
+      <div class="sec-head">
+        <div class="sec-ico">☕</div>
+        <div><div class="sec-title">Café</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">7 SKUs</span>
+      </div>
+      <div class="grid" id="g-cafe"></div>
+    </section>
+    <section class="sec" id="cat-cerealesygranolas">
+      <div class="sec-head">
+        <div class="sec-ico">🥣</div>
+        <div><div class="sec-title">Cereales y Granolas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">11 SKUs</span>
+      </div>
+      <div class="grid" id="g-cerealesygranolas"></div>
+    </section>
+    <section class="sec" id="cat-chocolatesyconfiteria">
+      <div class="sec-head">
+        <div class="sec-ico">🍫</div>
+        <div><div class="sec-title">Chocolates y Confitería</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">23 SKUs</span>
+      </div>
+      <div class="grid" id="g-chocolatesyconfiteria"></div>
+    </section>
+    <section class="sec" id="cat-enlatados">
+      <div class="sec-head">
+        <div class="sec-ico">🥫</div>
+        <div><div class="sec-title">Enlatados</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">8 SKUs</span>
+      </div>
+      <div class="grid" id="g-enlatados"></div>
+    </section>
+    <section class="sec" id="cat-esparcibles">
+      <div class="sec-head">
+        <div class="sec-ico">🧈</div>
+        <div><div class="sec-title">Esparcibles</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">19 SKUs</span>
+      </div>
+      <div class="grid" id="g-esparcibles"></div>
+    </section>
+    <section class="sec" id="cat-frutossecos">
+      <div class="sec-head">
+        <div class="sec-ico">🥜</div>
+        <div><div class="sec-title">Frutos Secos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">31 SKUs</span>
+      </div>
+      <div class="grid" id="g-frutossecos"></div>
+    </section>
+    <section class="sec" id="cat-galleteria">
+      <div class="sec-head">
+        <div class="sec-ico">🍪</div>
+        <div><div class="sec-title">Galletería</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">39 SKUs</span>
+      </div>
+      <div class="grid" id="g-galleteria"></div>
+    </section>
+    <section class="sec" id="cat-harinas">
+      <div class="sec-head">
+        <div class="sec-ico">🌾</div>
+        <div><div class="sec-title">Harinas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">7 SKUs</span>
+      </div>
+      <div class="grid" id="g-harinas"></div>
+    </section>
+    <section class="sec" id="cat-horneados">
+      <div class="sec-head">
+        <div class="sec-ico">🍰</div>
+        <div><div class="sec-title">Horneados</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">11 SKUs</span>
+      </div>
+      <div class="grid" id="g-horneados"></div>
+    </section>
+    <section class="sec" id="cat-mezclasenpolvo">
+      <div class="sec-head">
+        <div class="sec-ico">🫙</div>
+        <div><div class="sec-title">Mezclas en Polvo</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">7 SKUs</span>
+      </div>
+      <div class="grid" id="g-mezclasenpolvo"></div>
+    </section>
+    <section class="sec" id="cat-mielesyendulzantes">
+      <div class="sec-head">
+        <div class="sec-ico">🍯</div>
+        <div><div class="sec-title">Mieles y Endulzantes</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">10 SKUs</span>
+      </div>
+      <div class="grid" id="g-mielesyendulzantes"></div>
+    </section>
+    <section class="sec" id="cat-pastas">
+      <div class="sec-head">
+        <div class="sec-ico">🍝</div>
+        <div><div class="sec-title">Pastas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">15 SKUs</span>
+      </div>
+      <div class="grid" id="g-pastas"></div>
+    </section>
+    <section class="sec" id="cat-salsasyaderezos">
+      <div class="sec-head">
+        <div class="sec-ico">🫙</div>
+        <div><div class="sec-title">Salsas y Aderezos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">30 SKUs</span>
+      </div>
+      <div class="grid" id="g-salsasyaderezos"></div>
+    </section>
+    <section class="sec" id="cat-sazonadores">
+      <div class="sec-head">
+        <div class="sec-ico">🌶️</div>
+        <div><div class="sec-title">Sazonadores</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">10 SKUs</span>
+      </div>
+      <div class="grid" id="g-sazonadores"></div>
+    </section>
+    <section class="sec" id="cat-superalimentos">
+      <div class="sec-head">
+        <div class="sec-ico">🌿</div>
+        <div><div class="sec-title">Super Alimentos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">2 SKUs</span>
+      </div>
+      <div class="grid" id="g-superalimentos"></div>
+    </section>
+    <section class="sec" id="cat-teeinfusiones">
+      <div class="sec-head">
+        <div class="sec-ico">🍵</div>
+        <div><div class="sec-title">Té e Infusiones</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">6 SKUs</span>
+      </div>
+      <div class="grid" id="g-teeinfusiones"></div>
+    </section>
+    <section class="sec" id="cat-tostadas">
+      <div class="sec-head">
+        <div class="sec-ico">🍞</div>
+        <div><div class="sec-title">Tostadas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">3 SKUs</span>
+      </div>
+      <div class="grid" id="g-tostadas"></div>
+    </section>
+    <section class="sec" id="cat-wrap">
+      <div class="sec-head">
+        <div class="sec-ico">🌯</div>
+        <div><div class="sec-title">Wrap</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">2 SKUs</span>
+      </div>
+      <div class="grid" id="g-wrap"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-bebidas">
+    <div class="fam-title">Bebidas <span class="fam-cnt">(32)</span></div>
+    
+    <section class="sec" id="cat-aguas">
+      <div class="sec-head">
+        <div class="sec-ico">💧</div>
+        <div><div class="sec-title">Aguas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">2 SKUs</span>
+      </div>
+      <div class="grid" id="g-aguas"></div>
+    </section>
+    <section class="sec" id="cat-bebidasdecafe">
+      <div class="sec-head">
+        <div class="sec-ico">☕</div>
+        <div><div class="sec-title">Bebidas de Café</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">6 SKUs</span>
+      </div>
+      <div class="grid" id="g-bebidasdecafe"></div>
+    </section>
+    <section class="sec" id="cat-bebidasfermentadas">
+      <div class="sec-head">
+        <div class="sec-ico">🫧</div>
+        <div><div class="sec-title">Bebidas Fermentadas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-bebidasfermentadas"></div>
+    </section>
+    <section class="sec" id="cat-bebidasvegetales">
+      <div class="sec-head">
+        <div class="sec-ico">🌱</div>
+        <div><div class="sec-title">Bebidas Vegetales</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-bebidasvegetales"></div>
+    </section>
+    <section class="sec" id="cat-energizantes">
+      <div class="sec-head">
+        <div class="sec-ico">⚡</div>
+        <div><div class="sec-title">Energizantes</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-energizantes"></div>
+    </section>
+    <section class="sec" id="cat-gomashidratantes">
+      <div class="sec-head">
+        <div class="sec-ico">💊</div>
+        <div><div class="sec-title">Gomas Hidratantes</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">6 SKUs</span>
+      </div>
+      <div class="grid" id="g-gomashidratantes"></div>
+    </section>
+    <section class="sec" id="cat-teliquido">
+      <div class="sec-head">
+        <div class="sec-ico">🍵</div>
+        <div><div class="sec-title">Té Líquido</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">3 SKUs</span>
+      </div>
+      <div class="grid" id="g-teliquido"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-snacksypasabocas">
+    <div class="fam-title">Snacks y Pasabocas <span class="fam-cnt">(38)</span></div>
+    
+    <section class="sec" id="cat-chicharrones">
+      <div class="sec-head">
+        <div class="sec-ico">🥓</div>
+        <div><div class="sec-title">Chicharrones</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-chicharrones"></div>
+    </section>
+    <section class="sec" id="cat-chips">
+      <div class="sec-head">
+        <div class="sec-ico">🍟</div>
+        <div><div class="sec-title">Chips</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">6 SKUs</span>
+      </div>
+      <div class="grid" id="g-chips"></div>
+    </section>
+    <section class="sec" id="cat-crispetas">
+      <div class="sec-head">
+        <div class="sec-ico">🍿</div>
+        <div><div class="sec-title">Crispetas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">4 SKUs</span>
+      </div>
+      <div class="grid" id="g-crispetas"></div>
+    </section>
+    <section class="sec" id="cat-papitas">
+      <div class="sec-head">
+        <div class="sec-ico">🥔</div>
+        <div><div class="sec-title">Papitas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">4 SKUs</span>
+      </div>
+      <div class="grid" id="g-papitas"></div>
+    </section>
+    <section class="sec" id="cat-platanitos">
+      <div class="sec-head">
+        <div class="sec-ico">🍌</div>
+        <div><div class="sec-title">Platanitos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-platanitos"></div>
+    </section>
+    <section class="sec" id="cat-rosquitas">
+      <div class="sec-head">
+        <div class="sec-ico">🍩</div>
+        <div><div class="sec-title">Rosquitas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">3 SKUs</span>
+      </div>
+      <div class="grid" id="g-rosquitas"></div>
+    </section>
+    <section class="sec" id="cat-snacks">
+      <div class="sec-head">
+        <div class="sec-ico">🍿</div>
+        <div><div class="sec-title">Snacks</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">9 SKUs</span>
+      </div>
+      <div class="grid" id="g-snacks"></div>
+    </section>
+    <section class="sec" id="cat-yucasnachos">
+      <div class="sec-head">
+        <div class="sec-ico">🌮</div>
+        <div><div class="sec-title">Yucas & Nachos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">2 SKUs</span>
+      </div>
+      <div class="grid" id="g-yucasnachos"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-lacteosyrefrigerados">
+    <div class="fam-title">Lácteos y Refrigerados <span class="fam-cnt">(23)</span></div>
+    
+    <section class="sec" id="cat-esparciblesrefrigerados">
+      <div class="sec-head">
+        <div class="sec-ico">🧈</div>
+        <div><div class="sec-title">Esparcibles Refrigerados</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">4 SKUs</span>
+      </div>
+      <div class="grid" id="g-esparciblesrefrigerados"></div>
+    </section>
+    <section class="sec" id="cat-quesosregulares">
+      <div class="sec-head">
+        <div class="sec-ico">🧀</div>
+        <div><div class="sec-title">Quesos Regulares</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">8 SKUs</span>
+      </div>
+      <div class="grid" id="g-quesosregulares"></div>
+    </section>
+    <section class="sec" id="cat-quesosveganos">
+      <div class="sec-head">
+        <div class="sec-ico">🧀</div>
+        <div><div class="sec-title">Quesos Veganos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">2 SKUs</span>
+      </div>
+      <div class="grid" id="g-quesosveganos"></div>
+    </section>
+    <section class="sec" id="cat-yoguresregulares">
+      <div class="sec-head">
+        <div class="sec-ico">🥛</div>
+        <div><div class="sec-title">Yogures Regulares</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">8 SKUs</span>
+      </div>
+      <div class="grid" id="g-yoguresregulares"></div>
+    </section>
+    <section class="sec" id="cat-yogurtvegano">
+      <div class="sec-head">
+        <div class="sec-ico">🌱</div>
+        <div><div class="sec-title">Yogurt Vegano</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">1 SKUs</span>
+      </div>
+      <div class="grid" id="g-yogurtvegano"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-congelados">
+    <div class="fam-title">Congelados <span class="fam-cnt">(38)</span></div>
+    
+    <section class="sec" id="cat-arepascongeladas">
+      <div class="sec-head">
+        <div class="sec-ico">🫓</div>
+        <div><div class="sec-title">Arepas Congeladas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">8 SKUs</span>
+      </div>
+      <div class="grid" id="g-arepascongeladas"></div>
+    </section>
+    <section class="sec" id="cat-carnesdeorigenvegetal">
+      <div class="sec-head">
+        <div class="sec-ico">🌿</div>
+        <div><div class="sec-title">Carnes de Origen Vegetal</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">1 SKUs</span>
+      </div>
+      <div class="grid" id="g-carnesdeorigenvegetal"></div>
+    </section>
+    <section class="sec" id="cat-comidapreparada">
+      <div class="sec-head">
+        <div class="sec-ico">🍱</div>
+        <div><div class="sec-title">Comida Preparada</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-comidapreparada"></div>
+    </section>
+    <section class="sec" id="cat-heladosypaletas">
+      <div class="sec-head">
+        <div class="sec-ico">🍦</div>
+        <div><div class="sec-title">Helados y Paletas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">17 SKUs</span>
+      </div>
+      <div class="grid" id="g-heladosypaletas"></div>
+    </section>
+    <section class="sec" id="cat-pastapizza">
+      <div class="sec-head">
+        <div class="sec-ico">🍕</div>
+        <div><div class="sec-title">Pasta & Pizza</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">2 SKUs</span>
+      </div>
+      <div class="grid" id="g-pastapizza"></div>
+    </section>
+    <section class="sec" id="cat-pulpasdefrutas">
+      <div class="sec-head">
+        <div class="sec-ico">🍹</div>
+        <div><div class="sec-title">Pulpas de Frutas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-pulpasdefrutas"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-carnicos">
+    <div class="fam-title">Cárnicos <span class="fam-cnt">(20)</span></div>
+    
+    <section class="sec" id="cat-carnesblancas">
+      <div class="sec-head">
+        <div class="sec-ico">🍗</div>
+        <div><div class="sec-title">Carnes Blancas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">3 SKUs</span>
+      </div>
+      <div class="grid" id="g-carnesblancas"></div>
+    </section>
+    <section class="sec" id="cat-carnesrojas">
+      <div class="sec-head">
+        <div class="sec-ico">🥩</div>
+        <div><div class="sec-title">Carnes Rojas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">9 SKUs</span>
+      </div>
+      <div class="grid" id="g-carnesrojas"></div>
+    </section>
+    <section class="sec" id="cat-embutidos">
+      <div class="sec-head">
+        <div class="sec-ico">🥓</div>
+        <div><div class="sec-title">Embutidos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">3 SKUs</span>
+      </div>
+      <div class="grid" id="g-embutidos"></div>
+    </section>
+    <section class="sec" id="cat-pescadomariscos">
+      <div class="sec-head">
+        <div class="sec-ico">🐟</div>
+        <div><div class="sec-title">Pescado & Mariscos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-pescadomariscos"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-suplementosysalud">
+    <div class="fam-title">Suplementos y Salud <span class="fam-cnt">(105)</span></div>
+    
+    <section class="sec" id="cat-aminoacidos">
+      <div class="sec-head">
+        <div class="sec-ico">💪</div>
+        <div><div class="sec-title">Amino Ácidos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">4 SKUs</span>
+      </div>
+      <div class="grid" id="g-aminoacidos"></div>
+    </section>
+    <section class="sec" id="cat-barrasdeproteinas">
+      <div class="sec-head">
+        <div class="sec-ico">💪</div>
+        <div><div class="sec-title">Barras de Proteínas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">27 SKUs</span>
+      </div>
+      <div class="grid" id="g-barrasdeproteinas"></div>
+    </section>
+    <section class="sec" id="cat-colageno">
+      <div class="sec-head">
+        <div class="sec-ico">✨</div>
+        <div><div class="sec-title">Colágeno</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">4 SKUs</span>
+      </div>
+      <div class="grid" id="g-colageno"></div>
+    </section>
+    <section class="sec" id="cat-creatinas">
+      <div class="sec-head">
+        <div class="sec-ico">💪</div>
+        <div><div class="sec-title">Creatinas</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">7 SKUs</span>
+      </div>
+      <div class="grid" id="g-creatinas"></div>
+    </section>
+    <section class="sec" id="cat-proteinasenpolvo">
+      <div class="sec-head">
+        <div class="sec-ico">💪</div>
+        <div><div class="sec-title">Proteínas en Polvo</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">22 SKUs</span>
+      </div>
+      <div class="grid" id="g-proteinasenpolvo"></div>
+    </section>
+    <section class="sec" id="cat-snackproteicos">
+      <div class="sec-head">
+        <div class="sec-ico">💪</div>
+        <div><div class="sec-title">Snack Proteícos</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">5 SKUs</span>
+      </div>
+      <div class="grid" id="g-snackproteicos"></div>
+    </section>
+    <section class="sec" id="cat-suplementodietario">
+      <div class="sec-head">
+        <div class="sec-ico">💊</div>
+        <div><div class="sec-title">Suplemento Dietario</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">14 SKUs</span>
+      </div>
+      <div class="grid" id="g-suplementodietario"></div>
+    </section>
+    <section class="sec" id="cat-suplementonutricional">
+      <div class="sec-head">
+        <div class="sec-ico">💊</div>
+        <div><div class="sec-title">Suplemento Nutricional</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">8 SKUs</span>
+      </div>
+      <div class="grid" id="g-suplementonutricional"></div>
+    </section>
+    <section class="sec" id="cat-vitaminasycomplementosnutricionales">
+      <div class="sec-head">
+        <div class="sec-ico">💊</div>
+        <div><div class="sec-title">Vitaminas y Complementos Nutricionales</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">14 SKUs</span>
+      </div>
+      <div class="grid" id="g-vitaminasycomplementosnutricionales"></div>
+    </section>
+  </div>
+
+  <div class="fam-group" id="fam-panaderia">
+    <div class="fam-title">Panadería <span class="fam-cnt">(1)</span></div>
+    
+    <section class="sec" id="cat-panaderiaregular">
+      <div class="sec-head">
+        <div class="sec-ico">🍞</div>
+        <div><div class="sec-title">Panadería Regular</div></div>
+        <div class="sec-line"></div>
+        <span class="sec-cnt">1 SKUs</span>
+      </div>
+      <div class="grid" id="g-panaderiaregular"></div>
+    </section>
+  </div>
+</main>
+<footer style="background:#1e3d28;color:rgba(255,255,255,.4);text-align:center;padding:20px 32px;font-size:11px;line-height:1.9">
+  <strong style="color:rgba(255,255,255,.7)">Fithub · Canal Institucional · STF 15 Usaquén, Bogotá</strong><br>
+  Portafolio preparado para Lina Galvis Mercado Saludable · NIT 1073321568-5 · Junio 2026<br>
+  <span style="opacity:.5;font-size:10px">Confidencial — uso exclusivo de Fithub / Adwellch S.A.S.</span>
+</footer>
+<div class="sel-bar" id="sel-bar">
+  <div class="sel-bar-info">
+    <span class="sel-bar-count" id="sel-count">0 productos seleccionados</span>
+    <span class="sel-bar-total" id="sel-total">Total: $0</span>
+  </div>
+  <div class="sel-bar-btns">
+    <button class="btn-clear" onclick="limpiar()">✕ Limpiar</button>
+    <button class="btn-excel" onclick="descargarSeleccion()">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Descargar productos preseleccionados y enviar a Fithub
+    </button>
+  </div>
+</div>
+<script>
+const PEDIDO_MIN = 2000000;
+const TIENDA = 'STF 15 - Usaquén, Bogotá';
+const CLIENTE = 'Lina Galvis Mercado Saludable';
+const NIT = '1073321568-5';
+
+const DATA = new Map([
+  ["Aceites",[{"sku":"89029145","name":"Aceite de Coco Orgánico - fithub x 200 ml","brand":"Fithub","cat":"Aceites","price":26350,"slug":"aceite-de-coco-organico-fithub-x-200-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89029145_7vVcvJl.png"},{"sku":"79023740","name":"Aceite de Aguacate - Oleo Hass x 250 ml","brand":"Oleo Hass","cat":"Aceites","price":52800,"slug":"aceite-de-aguacate-oleo-hass-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79023740.jpg"},{"sku":"79181819","name":"Aceite De Oliva Colavita Extra Virgen - Colavita X 250 ml","brand":"Colavita","cat":"Aceites","price":37850,"slug":"aceite-de-oliva-colavita-extra-virgen-colavita-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e851d051-660a-49cd-863c-9f586ad98a92.jpg"},{"sku":"79182533","name":"Aceite de Trufa Negra - Sabatino x 250 ml","brand":"Sabatino","cat":"Aceites","price":174900,"slug":"aceite-de-trufa-negra-sabatino-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/dae0e4be-945c-4533-9f3f-387520d5cbf3.jpg"},{"sku":"79183002","name":"Grasa De Res - Super Mundo x 250 g","brand":"Super Mundo","cat":"Aceites","price":26600,"slug":"grasa-de-res-super-mundo-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5ae50c76-92e4-49b9-9bc7-66f7b79ac490.jpg"},{"sku":"79019323","name":"Aceite Spray Coco - Pam x 113 g","brand":"Pam","cat":"Aceites","price":40500,"slug":"aceite-spray-coco-pam-x-113-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79019323.png"},{"sku":"79076135","name":"Aceite Vegetal de Coco - MCT Oil x 591 ml","brand":"MCT Oil","cat":"Aceites","price":199900,"slug":"aceite-vegetal-de-coco-mct-oil-x-591-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076135.jpg"},{"sku":"79182531","name":"Aceite de Trufa Blanca - Sabatino x 250 ml","brand":"Sabatino","cat":"Aceites","price":189900,"slug":"aceite-de-trufa-blanca-sabatino-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8607820d-3bb0-4824-a5c6-482be9c627d2.jpg"},{"sku":"79183001","name":"Grasa De Cerdo - Super Mundo x 250 ml","brand":"Super Mundo","cat":"Aceites","price":29100,"slug":"grasa-de-cerdo-super-mundo-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/904e5d51-18ca-430b-8c87-246996ad4a68.jpg"}]],
+  ["Arroces, Granos y Semillas",[{"sku":"89018538","name":"Semillas de Chía - fithub x 250 g","brand":"Fithub","cat":"Arroces, Granos y Semillas","price":15500,"slug":"semillas-de-chia-fithub-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89018538.jpg"},{"sku":"79070782","name":"Semillas de Calabaza - fithub x 250 g","brand":"Fithub","cat":"Arroces, Granos y Semillas","price":17100,"slug":"semillas-de-calabaza-fithub-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070782.jpg"},{"sku":"89026915","name":"Linaza Molida - Karavansay x 500 g","brand":"Karavansay","cat":"Arroces, Granos y Semillas","price":15300,"slug":"linaza-molida-karavansay-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89026915.jpg"},{"sku":"79034500","name":"Arroz Integral con Quinua - Karavansay x 500 g","brand":"Karavansay","cat":"Arroces, Granos y Semillas","price":12200,"slug":"arroz-integral-con-quinua-karavansay-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79034500.jpg"},{"sku":"79056625","name":"Cuscús Original - Tipiak x 500 g","brand":"Tipiak","cat":"Arroces, Granos y Semillas","price":25000,"slug":"cuscus-original-tipiak-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79056625.png"},{"sku":"89028612","name":"Girasol Descortezado - Salugran x 500 g","brand":"Salugran","cat":"Arroces, Granos y Semillas","price":17900,"slug":"girasol-descortezado-salugran-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Girasol_Descortezado_-_500g.png"},{"sku":"79021333","name":"Grano de Quinoa Real Mix Orgánico - Andean Valley x 300 g","brand":"Andean Valley","cat":"Arroces, Granos y Semillas","price":20200,"slug":"grano-de-quinoa-real-mix-organico-andean-valley-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/quinoa_real_mix_.png"},{"sku":"89018347","name":"Ajonjolí Descortezado - Prodelagro x 500 g","brand":"Prodelagro","cat":"Arroces, Granos y Semillas","price":21800,"slug":"ajonjoli-descortezado-prodelagro-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89018347.png"},{"sku":"79073707","name":"Semilla de Girasol Natural - Prodelagro x 500 g","brand":"Prodelagro","cat":"Arroces, Granos y Semillas","price":18900,"slug":"semilla-de-girasol-natural-prodelagro-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073707.jpg"},{"sku":"79180358","name":"Frijol Cargamanto Rojo - Savoria X 500 g","brand":"Savoria","cat":"Arroces, Granos y Semillas","price":6550,"slug":"frijol-cargamanto-rojo-savoria-x-500-g-2","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0a606d61-baa3-4a4a-928a-644beed10c9a.jpg"},{"sku":"79021302","name":"Grano de Quínoa Real Blanco Orgánico - Andean Valley x 300 gr","brand":"Andean Valley","cat":"Arroces, Granos y Semillas","price":17500,"slug":"grano-de-quinoa-real-blanco-organico-andean-valley-x-300-gr","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Grano_de_Quinoa_Real_Blanco_Organico_-_300g.png"},{"sku":"79021319","name":"Grano de Quinoa Real Rojo Orgánico - Andean Valley x 300 g","brand":"Andean Valley","cat":"Arroces, Granos y Semillas","price":20200,"slug":"grano-de-quinoa-real-rojo-organico-andean-valley-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Grano_de_Quinoa_Real_Rojo_Organico_-_300g.png"},{"sku":"89028803","name":"Ajonjolí Descortezado - Salugran x 500 g","brand":"Salugran","cat":"Arroces, Granos y Semillas","price":24250,"slug":"ajonjoli-descortezado-salugran-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Ajonjolí_Descortezado_-_500g.png"},{"sku":"79181807","name":"Arroz Arborio - Colavita X 500 g","brand":"Colavita","cat":"Arroces, Granos y Semillas","price":24500,"slug":"arroz-arborio-colavita-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1b097aec-be83-45c8-8057-1411f73ddbf1.jpg"}]],
+  ["Avena",[{"sku":"79072663","name":"Salvado de Avena - Salugran x 500 g","brand":"Salugran","cat":"Avena","price":11300,"slug":"salvado-de-avena-salugran-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072663.jpg"}]],
+  ["Café",[{"sku":"79057134","name":"Tesoro Clásico - Café Mesa de los Santos x 454 g","brand":"Café Mesa de los Santos","cat":"Café","price":51800,"slug":"tesoro-clasico-cafe-mesa-de-los-santos-x-454-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79057134.jpg"},{"sku":"79074582","name":"Café Molido - Mekaddesh x 250 g","brand":"Mekaddesh","cat":"Café","price":40000,"slug":"cafe-molido-mekaddesh-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074583.jpg"},{"sku":"79076296","name":"Café&Café Fit - Fuxion x 140 g","brand":"Fuxion","cat":"Café","price":175900,"slug":"cafecafe-fit-fuxion-x-140-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076296.jpg"},{"sku":"79181687","name":"Café Granulado - Colcafe X 170 g","brand":"Colcafé","cat":"Café","price":27400,"slug":"cafe-granulado-colcafe-x-170-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0fd18df0-1318-4ada-af07-2e158c2d8102.jpg"},{"sku":"79181695","name":"Café 3 en 1 Light - Colcafe X 310 g","brand":"Colcafé","cat":"Café","price":42300,"slug":"cafe-3-en-1-light-colcafe-x-310-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6c7ac9d0-0eb6-4469-b19e-622c58024018.jpg"},{"sku":"79181697","name":"Coffe Crem V2 - Colcafe X 290 g","brand":"Colcafé","cat":"Café","price":19000,"slug":"coffe-crem-v2-colcafe-x-290-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0014fbfc-af95-4be7-bc7f-59a16beb75fa.jpg"},{"sku":"79181699","name":"Cappuccino Clasico - Colcafe X 18 g","brand":"Colcafé","cat":"Café","price":10750,"slug":"cappuccino-clasico-colcafe-x-18-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8216c925-764d-4bd7-978c-69c31b8f08b1.jpg"}]],
+  ["Cereales y Granolas",[{"sku":"89025871","name":"Granola Crumbs Vainilla - fithub x 60 g","brand":"Fithub","cat":"Cereales y Granolas","price":8100,"slug":"granola-crumbs-vainilla-fithub-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/anaknsan.png"},{"sku":"89025888","name":"Granola Crumbs Vainilla - fithub x 300 g","brand":"Fithub","cat":"Cereales y Granolas","price":38000,"slug":"granola-crumbs-vainilla-fithub-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89025888.jpg"},{"sku":"79074247","name":"Granola Crumbs Choco Berry - fithub x 60 g","brand":"Fithub","cat":"Cereales y Granolas","price":8100,"slug":"granola-crumbs-choco-berry-fithub-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074248.jpg"},{"sku":"89017104","name":"Granola Crumbs Choco Berry - fithub x 300 g","brand":"Fithub","cat":"Cereales y Granolas","price":36950,"slug":"granola-crumbs-choco-berry-fithub-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89017104.jpg"},{"sku":"89100019","name":"Granola Vainilla - Paranice x 300 g","brand":"Paranice","cat":"Cereales y Granolas","price":40600,"slug":"granola-vainilla-paranice-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d0cec392-e613-4c86-8bf4-f02fa8ff796f.jpg"},{"sku":"79075572","name":"Cereal Puff con Panela Orgánica - Quinoa Club x 100 g","brand":"Quinoa Club","cat":"Cereales y Granolas","price":15800,"slug":"cereal-puff-con-panela-organica-quinoa-club-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79075572.jpg"},{"sku":"79182928","name":"Cereal Quinua Extruida Chocolate - Vitalsinu x 250 g","brand":"Vitalsinu","cat":"Cereales y Granolas","price":9000,"slug":"cereal-quinua-extruida-chocolate-vitalsinu-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/41ca4369-35d3-4741-811a-0ea9c2569834.jpg"},{"sku":"79079495","name":"Cereal Quinua Extruida Vainilla - Montesol x 500 g","brand":"Montesol","cat":"Cereales y Granolas","price":35400,"slug":"cereal-quinua-extruida-vainilla-montesol-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079495.jpg"},{"sku":"79079488","name":"Cereal Quinua Extruida Chocolate - Montesol x 250 g","brand":"Montesol","cat":"Cereales y Granolas","price":22400,"slug":"cereal-quinua-extruida-chocolate-montesol-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079488.jpg"},{"sku":"79079471","name":"Cereal Quinua Extruida Chocolate - Montesol x 500 g","brand":"Montesol","cat":"Cereales y Granolas","price":36900,"slug":"cereal-quinua-extruida-chocolate-montesol-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/77544447.jpg"},{"sku":"79021326","name":"Grano de Quinoa Real Negro Orgánico - Andean Valley x 300 g","brand":"Andean Valley","cat":"Cereales y Granolas","price":20200,"slug":"grano-de-quinoa-real-negro-organico-andean-valley-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Grano_de_Quinoa_Real_Negro_Organico_-_300g.png"}]],
+  ["Chocolates y Confitería",[{"sku":"79079846","name":"Barra de Cacao 85% - Lök x 60 g","brand":"Lök","cat":"Chocolates y Confitería","price":19800,"slug":"barra-de-cacao-85-lok-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079846.jpg"},{"sku":"79074667","name":"Barra de Chocolate con Stevia 85% - Lök x 70 g","brand":"Lök","cat":"Chocolates y Confitería","price":23150,"slug":"barra-de-chocolate-con-stevia-85-lok-x-70-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074667.jpg"},{"sku":"79182842","name":"Chocolate Blanco Maracuya - Sagu Chocolate x 80 g","brand":"Sagu chocolate","cat":"Chocolates y Confitería","price":19000,"slug":"chocolate-blanco-maracuya-sagu-chocolate-x-80-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6d311a07-fb7c-43e8-b954-fb4483927711.jpg"},{"sku":"89018439","name":"Caramelo de Café + Stevia - Nicolay x 10 uds","brand":"Nicolay","cat":"Chocolates y Confitería","price":5700,"slug":"caramelo-de-cafe-stevia-nicolay-x-10-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/FITHUB-22COPIA.jpg"},{"sku":"79074650","name":"Barra de Chocolate con Stevia 75% - Lök x 70 g","brand":"Lök","cat":"Chocolates y Confitería","price":23150,"slug":"barra-de-chocolate-con-stevia-75-lok-x-70-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074650.jpg"},{"sku":"79182840","name":"Gragea Chocolate Blanco con Almendra - Sagu Chocolate x 60 g","brand":"Sagu chocolate","cat":"Chocolates y Confitería","price":14000,"slug":"gragea-chocolate-blanco-con-almendra-sagu-chocolate-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f43c3b10-d755-4e47-9be8-7bfceaff0b34.jpg"},{"sku":"89016831","name":"Barra de Cacao 58% - Lök x 60g","brand":"Lök","cat":"Chocolates y Confitería","price":16500,"slug":"barra-de-cacao-58-lok-x-60g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016831_QfpaQ94.jpg"},{"sku":"89016848","name":"Barra de Cacao 60% - Lök x 60 g","brand":"Lök","cat":"Chocolates y Confitería","price":12500,"slug":"barra-de-cacao-60-lok-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016848_EhztH87.jpg"},{"sku":"89028490","name":"Barra de Chocolate 80% - Equiori x 80 g","brand":"Equiori","cat":"Chocolates y Confitería","price":25500,"slug":"barra-de-chocolate-80-equiori-x-80-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89028490.jpg"},{"sku":"79182839","name":"Gragea Chocolate 60% con Almendra - Sagu Chocolate x 60 g","brand":"Sagu chocolate","cat":"Chocolates y Confitería","price":14000,"slug":"gragea-chocolate-60-con-almendra-sagu-chocolate-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d6b7106d-add7-4f36-9702-b979b5b5c71e.jpg"},{"sku":"79074629","name":"Barra con Chocolate 72% con Miel - Lök x 70 g","brand":"Lök","cat":"Chocolates y Confitería","price":23150,"slug":"barra-con-chocolate-72-con-miel-lok-x-70-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074629_wqrM0Ec.jpg"},{"sku":"79181677","name":"Cocoa - Corona X 230 g","brand":"Corona","cat":"Chocolates y Confitería","price":17900,"slug":"cocoa-corona-x-230-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9bc3df03-4e22-4491-9439-686338bccaca.jpg"},{"sku":"79181678","name":"Cocoa - Corona X 100 g","brand":"Corona","cat":"Chocolates y Confitería","price":10150,"slug":"cocoa-corona-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/199e64e6-be71-425b-90d8-b346940aa82b.jpg"},{"sku":"79074643","name":"Barra de Chocolate 70% Pistacho, Almendra y Maní - Lök x 60 g","brand":"Lök","cat":"Chocolates y Confitería","price":20650,"slug":"barra-de-chocolate-70-pistacho-almendra-y-mani-lok-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8923e07a-3528-49d3-99aa-58ac9acf16a7.jpg"},{"sku":"79181676","name":"Chocolate Instantaneo Clavos y Canela - Corona X 200 g","brand":"Corona","cat":"Chocolates y Confitería","price":9990,"slug":"chocolate-instantaneo-clavos-y-canela-corona-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/59daa919-321f-429b-a67a-c280c6d81bc8.jpg"},{"sku":"79078481","name":"Chocolate Relleno de Tamarindo - Magia Negra x 60 g","brand":"Magia Negra","cat":"Chocolates y Confitería","price":19900,"slug":"chocolate-relleno-de-tamarindo-magia-negra-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79078481.jpg"},{"sku":"79181664","name":"Chocolate Clavos y Canela - Corona X 450 g","brand":"Corona","cat":"Chocolates y Confitería","price":17500,"slug":"chocolate-clavos-y-canela-corona-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/764d4852-42e9-4c8d-9ae0-e7efd82dc107.jpg"},{"sku":"79181672","name":"Chocolate - Corona X 200 g","brand":"Corona","cat":"Chocolates y Confitería","price":9850,"slug":"chocolate-corona-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/04619ea9-0a53-465c-a920-0ac8c2d43d68.jpg"},{"sku":"79181675","name":"Chocolate Instantaneo - Corona X 200 g","brand":"Corona","cat":"Chocolates y Confitería","price":9990,"slug":"chocolate-instantaneo-corona-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/22850a2c-ccae-4288-aaf4-5b77e4a8121c.jpg"},{"sku":"89026731","name":"Bark Lök Chocolate 70% Arándanos-Pistacho - Lök x 60 g","brand":"Lök","cat":"Chocolates y Confitería","price":20650,"slug":"bark-lok-chocolate-70-arandanos-pistacho-lok-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/890267328.jpg"},{"sku":"79077927","name":"Barra Chocolate Nibs de Cacao + Acaí 70% - Mereze x 100 g","brand":"Mereze","cat":"Chocolates y Confitería","price":21000,"slug":"barra-chocolate-nibs-de-cacao-acai-70-mereze-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077927.jpg"},{"sku":"79078474","name":"Chocolate Semi Amargo Mango Biche - Magia Negra x 60 g","brand":"Magia Negra","cat":"Chocolates y Confitería","price":19400,"slug":"chocolate-semi-amargo-mango-biche-magia-negra-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79078474.jpg"},{"sku":"79181663","name":"Chocolate - Corona X 450 g","brand":"Corona","cat":"Chocolates y Confitería","price":17500,"slug":"chocolate-corona-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4018b963-45b2-48c8-baab-a4909e467f64.jpg"}]],
+  ["Enlatados",[{"sku":"79971590","name":"Espárragos - MeToo x 180 g","brand":"MeToo","cat":"Enlatados","price":10950,"slug":"esparragos-metoo-x-180-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2009ddd1-3a94-455d-85f9-c883c778220c.jpg"},{"sku":"79070133","name":"Maíz Tierno - MeToo x 340 g","brand":"MeToo","cat":"Enlatados","price":7800,"slug":"maiz-tierno-metoo-x-340-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/de00a64a-29d6-4adc-bf5f-fa76fdab07ff.jpg"},{"sku":"79181818","name":"Tomate Diced - Colavita X 400 g","brand":"Colavita","cat":"Enlatados","price":15900,"slug":"tomate-diced-colavita-x-400-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b39b0475-c012-40ec-b5ab-353f56deb4fd.jpg"},{"sku":"79181814","name":"Tomate Crushed - Colavita X 400 g","brand":"Colavita","cat":"Enlatados","price":15850,"slug":"tomate-crushed-colavita-x-400-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1ba2f5b7-6573-4132-9867-b834bf34cbda.jpg"},{"sku":"79971591","name":"Lychee - MeToo x 567 g","brand":"MeToo","cat":"Enlatados","price":14450,"slug":"lychee-metoo-x-567-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/bc6ecc88-ead5-4f3b-8d58-ecdc2649a783.jpg"},{"sku":"79181780","name":"Champiñones Tajados - Kari X 425 g","brand":"Kari","cat":"Enlatados","price":8000,"slug":"champinones-tajados-kari-x-425-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8fab2210-45f7-43f5-96e8-a89728da52e9.jpg"},{"sku":"79181791","name":"Durazno Amarillo - Kari X 410 g","brand":"Kari","cat":"Enlatados","price":7400,"slug":"durazno-amarillo-kari-x-410-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/206919af-0b1b-476e-9ace-f2ac06c86efb.jpg"},{"sku":"79181792","name":"Piña En Rodajas - Kari X 565 g","brand":"Kari","cat":"Enlatados","price":16850,"slug":"pina-en-rodajas-kari-x-565-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/afd3860c-625b-4148-b7ee-0ac8e745dcbe.jpg"}]],
+  ["Esparcibles",[{"sku":"89030844b","name":"Crema de Maní - fithub x 210 g","brand":"Fithub","cat":"Esparcibles","price":18000,"slug":"crema-de-mani-fithub-x-210-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/crema_mani2.jpg"},{"sku":"89030844","name":"Arequipe Sin Azúcar - fithub x 280 g","brand":"Fithub","cat":"Esparcibles","price":19400,"slug":"arequipe-sin-azucar-fithub-x-280-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89030844.jpg"},{"sku":"89028896","name":"Ghee sin Sal - Fithub x 200 g","brand":"Fithub","cat":"Esparcibles","price":22500,"slug":"ghee-sin-sal-fithub-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89028896.png"},{"sku":"89031476","name":"Ghee - Karavansay x 420 g","brand":"Karavansay","cat":"Esparcibles","price":54300,"slug":"ghee-karavansay-x-420-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89031476.jpg"},{"sku":"79180840","name":"Crunchy Spread Marañón - Krima X 200 g","brand":"Krima","cat":"Esparcibles","price":31700,"slug":"crunchy-spread-maranon-krima-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d90d0cf7-2484-4364-9bd9-e7ef1f740a61.jpg"},{"sku":"79181779","name":"Crema De Coco - Kari X 400 ml","brand":"Kari","cat":"Esparcibles","price":16065,"slug":"crema-de-coco-kari-x-400-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/88189ada-a47c-4fe3-b49a-b2b4e182605b.jpg"},{"sku":"79031189","name":"Mermelada de Piña - Konfyt x 250 g","brand":"Konfyt","cat":"Esparcibles","price":21200,"slug":"mermelada-de-pina-konfyt-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/unnamed.jpg"},{"sku":"89016893","name":"Mantequilla Ajo - Alma x 300 g","brand":"Alma","cat":"Esparcibles","price":26500,"slug":"mantequilla-ajo-alma-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016893.jpg"},{"sku":"89025215","name":"Ghee con Albahaca - Karavansay x 175 g","brand":"Karavansay","cat":"Esparcibles","price":26800,"slug":"ghee-con-albahaca-karavansay-x-175-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89025215.jpg"},{"sku":"79070737","name":"Mermelada Mini - St. Dalfour 4uds x  28 g","brand":"St. Dalfour","cat":"Esparcibles","price":27200,"slug":"mermelada-mini-st-dalfour-4uds-x-28-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e54deeb5-f43a-40ed-a008-1e722a61eef1.png"},{"sku":"79071258","name":"Crema de Maní Nieve - Nutrelle x 220 g","brand":"Nutrelle","cat":"Esparcibles","price":20500,"slug":"crema-de-mani-nieve-nutrelle-x-220-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79071258.jpg"},{"sku":"79072724","name":"Mermelada de Piña y Mango - St. Dalfour x 284 g","brand":"St. Dalfour","cat":"Esparcibles","price":33500,"slug":"mermelada-de-pina-y-mango-st-dalfour-x-284-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072724_pPD6ZTQ.jpg"},{"sku":"79074711","name":"Crema de Marañon - Wake Up x 200 g","brand":"Wake Up","cat":"Esparcibles","price":45000,"slug":"crema-de-maranon-wake-up-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/78951212.jpg"},{"sku":"89100007","name":"Crema A Base De Marañón Con Macadamia - Anak x 290 g","brand":"Anak","cat":"Esparcibles","price":59990,"slug":"crema-a-base-de-maranon-con-macadamia-anak-x-290-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f2748594-880e-45cb-9667-c1648fc7961e.jpg"},{"sku":"89100168","name":"Mermelada de Frambuesa - Bonne Maman x 370 g","brand":"Bonne Maman","cat":"Esparcibles","price":39550,"slug":"mermelada-de-frambuesa-bonne-maman-x-370-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/571ffe4a-a5ee-424a-aea1-3fab65e86000.jpg"},{"sku":"89100008","name":"Crema A Base De Marañón De Cocoa - Anak x 290 g","brand":"Anak","cat":"Esparcibles","price":55909,"slug":"crema-a-base-de-maranon-de-cocoa-anak-x-290-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/bc359755-bbdd-413e-a9ec-a6ee5036ca1e.jpg"},{"sku":"89100170","name":"Mermelada de Cereza - Bonne Maman x 370 g","brand":"Bonne Maman","cat":"Esparcibles","price":37500,"slug":"mermelada-de-cereza-bonne-maman-x-370-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/163aee0b-09f5-429d-a9b3-ee28662d279d.jpg"},{"sku":"89100171","name":"Mermelada de Durazno - Bonne Maman x 370 g","brand":"Bonne Maman","cat":"Esparcibles","price":33700,"slug":"mermelada-de-durazno-bonne-maman-x-370-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1d07782e-a512-471e-bfc2-fe950fd371d3.jpg"},{"sku":"89100172","name":"Mermelada de Naranja - Bonne Maman x 370 g","brand":"Bonne Maman","cat":"Esparcibles","price":33700,"slug":"mermelada-de-naranja-bonne-maman-x-370-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b6800f01-f822-4c9d-b8c1-36daec99af8f.jpg"}]],
+  ["Frutos Secos",[{"sku":"f02d1c40","name":"Almendra Natural - fithub x 250 g","brand":"Fithub","cat":"Frutos Secos","price":24200,"slug":"almendra-natural-fithub-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f02d1c40-bbf7-4228-9794-70c023ccdb8c.png"},{"sku":"89029428","name":"Marañón Natural - Salugran x 500 g","brand":"Salugran","cat":"Frutos Secos","price":66500,"slug":"maranon-natural-salugran-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Marañon_Natural_-_500g.png"},{"sku":"79182602","name":"Cebollas Fritas - Savory Supply x 200 g","brand":"Savory Supply","cat":"Frutos Secos","price":19990,"slug":"cebollas-fritas-savory-supply-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/293074f7-130a-42ca-85cf-b777f35a651e.jpg"},{"sku":"79182830","name":"Snack De Marañón con Chocolate Y Sal Marina - Kjú x 80 g","brand":"Kjú","cat":"Frutos Secos","price":29900,"slug":"snack-de-maranon-con-chocolate-y-sal-marina-kju-x-80-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/dd34bd20-161a-41a8-abcd-6387514c2e98.jpg"},{"sku":"79026666","name":"Almendra Natural - Del Alba x 200 g","brand":"Del Alba","cat":"Frutos Secos","price":29000,"slug":"almendra-natural-del-alba-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79026666.jpg"},{"sku":"89031483","name":"Almendra Natural - Salugran x 125 g","brand":"Salugran","cat":"Frutos Secos","price":13500,"slug":"almendra-natural-salugran-x-125-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Almendra_Natural_-_Salugran_x_125_g.png"},{"sku":"79026727","name":"Mix de Chocolate Chunck – Del Alba x 110 g","brand":"Del Alba","cat":"Frutos Secos","price":10500,"slug":"mix-de-chocolate-chunck-del-alba-x-110-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/mix_chocolate_chunk_alba.png"},{"sku":"79181886","name":"Nuez Pecán - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":40200,"slug":"nuez-pecan-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/913f2a3b-d073-426c-be6a-5e691c05d880.jpg"},{"sku":"79026703","name":"Mix del Campo - Del Alba x 140 g","brand":"Del Alba","cat":"Frutos Secos","price":14500,"slug":"mix-del-campo-del-alba-x-140-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/mix_del_campo.png"},{"sku":"79181888","name":"Marañón Tostado - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":36600,"slug":"maranon-tostado-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/91060f0c-b201-47ed-9583-f01d1e38e0a1.jpg"},{"sku":"79182835","name":"Snack De Marañon Tostado Con Sal - Kjú x 500 g","brand":"Kjú","cat":"Frutos Secos","price":88600,"slug":"snack-de-maranon-tostado-con-sal-kju-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/291c6d13-f832-4eed-b1ca-868a66afd2d6.jpg"},{"sku":"79026673","name":"Almendras Saladas - Del Alba x 100 g","brand":"Del Alba","cat":"Frutos Secos","price":17000,"slug":"almendras-saladas-del-alba-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/almendras_saladas.png"},{"sku":"79026895","name":"Maíz Picante - Del Alba x 140 g","brand":"Del Alba","cat":"Frutos Secos","price":10400,"slug":"maiz-picante-del-alba-x-140-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/maiz_picante_tostado.png"},{"sku":"79181893","name":"Almendra Fileteada - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":28190,"slug":"almendra-fileteada-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/653d1212-ee82-42af-9ef2-14b9d4302cb5.jpg"},{"sku":"79026888","name":"Maíz con Sal - Del Alba x 140 g","brand":"Del Alba","cat":"Frutos Secos","price":10800,"slug":"maiz-con-sal-del-alba-x-140-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/maiz_con_sal_.png"},{"sku":"79181878","name":"Marañón - Origen Natural X 500 g","brand":"Origen Natural","cat":"Frutos Secos","price":69750,"slug":"maranon-origen-natural-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6005d4dd-19e8-4284-863f-1ba6ecddf9ff.jpg"},{"sku":"79181885","name":"Nuez Pecán - Origen Natural X 500 g","brand":"Origen Natural","cat":"Frutos Secos","price":82790,"slug":"nuez-pecan-origen-natural-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2f82b203-c4fc-408b-a437-4fe89d5b4285.jpg"},{"sku":"79181887","name":"Marañón Tostado - Origen Natural X 500 g","brand":"Origen Natural","cat":"Frutos Secos","price":72050,"slug":"maranon-tostado-origen-natural-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/941335e3-7908-428f-a7d6-ebd1b89d866a.jpg"},{"sku":"79181891","name":"Almendra Tostada - Origen Natural X 500 g","brand":"Origen Natural","cat":"Frutos Secos","price":60490,"slug":"almendra-tostada-origen-natural-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a7210eff-3bd2-4956-b8ba-0e62b121100a.jpg"},{"sku":"79181900","name":"Mezcla de Frutos Secos con Deshidratados - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":40290,"slug":"mezcla-de-frutos-secos-con-deshidratados-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/780c0420-7dd6-465e-9a01-c76c917c3dfb.jpg"},{"sku":"79182322","name":"Marañon Za\'atar - Anak x 130 g","brand":"Anak","cat":"Frutos Secos","price":33000,"slug":"maranon-zaatar-anak-x-130-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a55d70a9-f739-4010-866f-4e29dfe554c6.jpg"},{"sku":"79182502","name":"Macadamia Natural - Frutos & Semillas x 250 g","brand":"Frutos & Semillas","cat":"Frutos Secos","price":51500,"slug":"macadamia-natural-frutos-semillas-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9efbfb82-507c-4188-bc30-e0251821fe78.jpg"},{"sku":"79181889","name":"Pistacho con Cáscara - Origen Natural X 500 g","brand":"Origen Natural","cat":"Frutos Secos","price":68690,"slug":"pistacho-con-cascara-origen-natural-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a72020d2-6163-4f89-80e9-d70ba9d2b86e.jpg"},{"sku":"79181899","name":"Avellana - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":33950,"slug":"avellana-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/bcc500e4-f9d2-4f6c-b606-3325989b672b.jpg"},{"sku":"79181901","name":"Mix Frutos Secos y Chocolate - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":35000,"slug":"mix-frutos-secos-y-chocolate-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9b07dc0c-27ca-45ef-875c-a50ca64d96b7.jpg"},{"sku":"79181881","name":"Almendra - Origen Natural X 500 g","brand":"Origen Natural","cat":"Frutos Secos","price":44250,"slug":"almendra-origen-natural-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/77c8d898-9dcc-4c02-b7a7-9e1453d8a098.jpg"},{"sku":"79181902","name":"Nuez Macadamia - Origen Natural X 250 g","brand":"Origen Natural","cat":"Frutos Secos","price":45450,"slug":"nuez-macadamia-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/55b3f7a0-aed5-4a9f-b586-34f4ac60bd8e.jpg"},{"sku":"79181898","name":"Almendra Confitada - Origen Natural X 150 g","brand":"Origen Natural","cat":"Frutos Secos","price":14590,"slug":"almendra-confitada-origen-natural-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/aba66d2f-da5f-44b2-93ab-c6f05aeb3f8b.jpg"},{"sku":"79182343","name":"Almendras Y Arándanos - Alara x 25 g","brand":"Alara","cat":"Frutos Secos","price":8590,"slug":"almendras-y-arandanos-alara-x-25-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/05b8de92-4524-4d8a-9f77-85945d26468f.jpg"},{"sku":"79182344","name":"Mix De Nueces - Alara x 25 g","brand":"Alara","cat":"Frutos Secos","price":8590,"slug":"mix-de-nueces-alara-x-25-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5c50732a-da4a-45b1-941a-8a7352bfe94e.jpg"},{"sku":"79182345","name":"Clusters De Semillas - Alara x 40 g","brand":"Alara","cat":"Frutos Secos","price":13750,"slug":"clusters-de-semillas-alara-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c764c60f-e3d9-4835-b2fc-ad9392d0823b.jpg"}]],
+  ["Galletería",[{"sku":"89018545","name":"Alfajor de Arroz Arequipe - fithub x 160 g","brand":"Fithub","cat":"Galletería","price":17500,"slug":"alfajor-de-arroz-arequipe-fithub-x-160-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89018545.jpg"},{"sku":"89016572","name":"Obleas Amaranto Nuez - fithub x 60 g","brand":"Fithub","cat":"Galletería","price":25800,"slug":"obleas-amaranto-nuez-fithub-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016572_zkcFffX.jpg"},{"sku":"89016596","name":"Obleas Amaranto con Coco - fithub x 60 g","brand":"Fithub","cat":"Galletería","price":25800,"slug":"obleas-amaranto-con-coco-fithub-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016597.jpg"},{"sku":"89016237","name":"Obleas Amaranto Frutos Rojos - fithub x 60 g","brand":"Fithub","cat":"Galletería","price":25800,"slug":"obleas-amaranto-frutos-rojos-fithub-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016237_mHXltr1.jpg"},{"sku":"89018637","name":"Obleas Amaranto Chocolate - fithub x 60 g","brand":"Fithub","cat":"Galletería","price":25800,"slug":"obleas-amaranto-chocolate-fithub-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89018637_EmoHwzP.jpg"},{"sku":"89018552","name":"Alfajor de Arroz Chocolate - fithub x 170 g","brand":"Fithub","cat":"Galletería","price":17800,"slug":"alfajor-de-arroz-chocolate-fithub-x-170-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89018552.jpg"},{"sku":"79074339","name":"Galleta de Arroz sabor Vainilla - fithub x 50 g","brand":"Fithub","cat":"Galletería","price":4000,"slug":"galleta-de-arroz-sabor-vainilla-fithub-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074340.jpg"},{"sku":"79074346","name":"Galleta de Arroz con Arándanos - fithub x 50 g","brand":"Fithub","cat":"Galletería","price":5400,"slug":"galleta-de-arroz-con-arandanos-fithub-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074347.jpg"},{"sku":"79074353","name":"Galleta de Arroz con Chips de Chocolate - fithub x 50 g","brand":"Fithub","cat":"Galletería","price":5800,"slug":"galleta-de-arroz-con-chips-de-chocolate-fithub-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074353.jpg"},{"sku":"79181940","name":"Galletas Avena - Damar Snacks 120g","brand":"Damar Snacks","cat":"Galletería","price":10300,"slug":"galletas-avena-damar-snacks-120g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/72d3f376-562e-46f8-ad0f-355b08283625.jpg"},{"sku":"79074520","name":"Mini Cookies sin Azúcar - Spiga x 30 g","brand":"Spiga","cat":"Galletería","price":4100,"slug":"mini-cookies-sin-azucar-spiga-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074520_WSh9eNU.jpg"},{"sku":"79181941","name":"Galletas Chips - Damar Snacks 45g","brand":"Damar Snacks","cat":"Galletería","price":6000,"slug":"galletas-chips-damar-snacks-45g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/626c187e-9ed7-4b6e-9042-04e5a2175803.jpg"},{"sku":"79182046","name":"Galletas de Almendrea Chocolate - Palamano x 70g","brand":"Palamano","cat":"Galletería","price":28300,"slug":"galletas-de-almendrea-chocolate-palamano-x-70g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d78ac70f-6eb4-4cfe-8184-399fe4bbdee0.jpg"},{"sku":"79029681","name":"Obleas Nuez - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":26200,"slug":"obleas-nuez-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79029681.jpg"},{"sku":"89022658","name":"Galleta Vainilla - Vitad x 30 g","brand":"Vitad","cat":"Galletería","price":3700,"slug":"galleta-vainilla-vitad-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89022658.jpg"},{"sku":"79181943","name":"Galletas Harina de Arroz Con Ajonjoli x2 - Damar Snacks  70g","brand":"Damar Snacks","cat":"Galletería","price":5800,"slug":"galletas-harina-de-arroz-con-ajonjoli-x2-damar-snacks-70g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e47027b9-a1eb-4d58-b162-03169288617e.jpg"},{"sku":"89028988","name":"Obleas de Frutos Rojos - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":26200,"slug":"obleas-de-frutos-rojos-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89028988.jpg"},{"sku":"89029305","name":"Obleas de Arándano - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":26200,"slug":"obleas-de-arandano-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89029305.jpg"},{"sku":"79054713","name":"Obleas Taro - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":26200,"slug":"obleas-taro-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79054713.jpg"},{"sku":"79054485","name":"Digestive sin Gluten - Gullón x 150 g","brand":"Gullón","cat":"Galletería","price":14800,"slug":"digestive-sin-gluten-gullon-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79054486.jpg"},{"sku":"89029220","name":"Obleas de Coco - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":26200,"slug":"obleas-de-coco-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89029220.jpg"},{"sku":"89031094","name":"Obleas de Amaranto - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":26200,"slug":"obleas-de-amaranto-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89031094.jpg"},{"sku":"89018194","name":"Galleta de Soya - Vital x 130 g","brand":"Vital","cat":"Galletería","price":14000,"slug":"galleta-de-soya-vital-x-130-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/GalletadeSoya-Vitalx100g.jpg"},{"sku":"79019569","name":"Fibra Diet Nature - Gullón x 170 g","brand":"Gullón","cat":"Galletería","price":12800,"slug":"fibra-diet-nature-gullon-x-170-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79019569.jpg"},{"sku":"79079051","name":"Digestive Muesli - Gullón x 365 g","brand":"Gullón","cat":"Galletería","price":20200,"slug":"digestive-muesli-gullon-x-365-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079051.jpg"},{"sku":"89031049","name":"Obleas Leche Dorada - Kalan x 60 g","brand":"Kalan","cat":"Galletería","price":27519,"slug":"obleas-leche-dorada-kalan-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89031049.jpg"},{"sku":"79019521","name":"Galleta Sándwich Yogurt - Gullón x 220 g","brand":"Gullón","cat":"Galletería","price":21300,"slug":"galleta-sandwich-yogurt-gullon-x-220-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79019521_TX7ZkOM.jpg"},{"sku":"79076760","name":"Galleta Vegana Roots Limón - Elemental Foods x 30 g","brand":"Elemental Foods","cat":"Galletería","price":5300,"slug":"galleta-vegana-roots-limon-elemental-foods-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076761.jpg"},{"sku":"79180393","name":"Galleta de Arroz y Arandanos - Probá X 45 g","brand":"Probá Snacks","cat":"Galletería","price":4900,"slug":"galleta-de-arroz-y-arandanos-proba-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0013.jpg"},{"sku":"79078634","name":"Panderitos - Konfyt x 250 g","brand":"Konfyt","cat":"Galletería","price":32500,"slug":"panderitos-konfyt-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79078634.jpg"},{"sku":"89100175","name":"Galletas de Caramelo - St Michel x 150 g","brand":"Madeleine St Michel","cat":"Galletería","price":26150,"slug":"galletas-de-caramelo-st-michel-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b4957bba-895a-4d1f-abda-bdec70b6fd02.jpg"},{"sku":"79181320","name":"Galleta - Ducales X 315 g","brand":"Ducales","cat":"Galletería","price":10100,"slug":"galleta-ducales-x-315-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4e783398-2734-4b50-bd47-a172d6eb87c8.png"},{"sku":"79181707","name":"Galleta Integral - Dux X 9 Unds","brand":"Dux","cat":"Galletería","price":7900,"slug":"galleta-integral-dux-x-9-unds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/72c74e8d-853a-4fb8-916d-a50b61a23ce1.jpg"},{"sku":"89100174","name":"Galletas de Mantequilla - St Michel x 130 g","brand":"Madeleine St Michel","cat":"Galletería","price":21550,"slug":"galletas-de-mantequilla-st-michel-x-130-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9f959707-ac5d-478f-97d2-d389a46b9c40.jpg"},{"sku":"89100176","name":"Galletas de Mantequilla con Sal Marina - St Michel x 150 g","brand":"Madeleine St Michel","cat":"Galletería","price":25300,"slug":"galletas-de-mantequilla-con-sal-marina-st-michel-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c87ffcdb-08a9-40d6-bcab-37ce6218f6c2.jpg"},{"sku":"79181090","name":"Galleta Arequipe x 75 g - OLÜ","brand":"OLÜ","cat":"Galletería","price":15300,"slug":"galleta-arequipe-x-75-g-olu","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/644ffaf2-0ab4-4a89-b415-b47ab2090cf7.jpg"},{"sku":"79181089","name":"Galleta Choco Avellanas x 76 g - OLÜ","brand":"OLÜ","cat":"Galletería","price":15300,"slug":"galleta-choco-avellanas-x-76-g-olu","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/77f6132d-7adb-4b9f-bf7b-9fb560a555e3.jpg"},{"sku":"79181088","name":"Galleta Red Velvet x 76 g - OLÜ","brand":"OLÜ","cat":"Galletería","price":15300,"slug":"galleta-red-velvet-x-76-g-olu","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/72a8795c-048c-466b-b755-1f912ea7acfd.jpg"},{"sku":"79181087","name":"Galleta Choco Chips x 76 g - OLÜ","brand":"OLÜ","cat":"Galletería","price":15300,"slug":"galleta-choco-chips-x-76-g-olu","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/910eb149-048a-4799-94d7-9d30edaa115f.jpg"}]],
+  ["Harinas",[{"sku":"89019306","name":"Harina de Almendras - fithub x 250 g","brand":"Fithub","cat":"Harinas","price":27500,"slug":"harina-de-almendras-fithub-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89019306.jpg"},{"sku":"89024171","name":"Harina de Garbanzo - fithub x 250 g","brand":"Fithub","cat":"Harinas","price":8300,"slug":"harina-de-garbanzo-fithub-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89024172.jpg"},{"sku":"89028797","name":"Harina de Coco - Salugran x 500 g","brand":"Salugran","cat":"Harinas","price":26900,"slug":"harina-de-coco-salugran-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89028797_yAU2VvK.png"},{"sku":"89028759","name":"Harina de Arroz Integral - Salugran x 500 g","brand":"Salugran","cat":"Harinas","price":7800,"slug":"harina-de-arroz-integral-salugran-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Harina_de_Arroz_Integral_-_500g.png"},{"sku":"89100017","name":"Harina De Avena - Paranice x 1000 g","brand":"Paranice","cat":"Harinas","price":28500,"slug":"harina-de-avena-paranice-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f14e2d38-5724-4276-9f30-42dfa1f2c004.jpg"},{"sku":"79076975","name":"Insta Pancakes Chocolate - Vegan Life x 100 g","brand":"Vegan Life","cat":"Harinas","price":12000,"slug":"insta-pancakes-chocolate-vegan-life-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076977.jpg"},{"sku":"79076982","name":"Insta Cookies Vainilla - Vegan Life x 100 g","brand":"Vegan Life","cat":"Harinas","price":11200,"slug":"insta-cookies-vainilla-vegan-life-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076984.jpg"}]],
+  ["Horneados",[{"sku":"89017265","name":"Empanadas de Espinaca - Del Origen x 12 uds","brand":"Del Origen","cat":"Horneados","price":37800,"slug":"empanadas-de-espinaca-del-origen-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/890172658.png"},{"sku":"89017708","name":"Falafel - Fenicia x 12 uds","brand":"Fenicia","cat":"Horneados","price":27200,"slug":"falafel-fenicia-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89017708.jpg"},{"sku":"89020203","name":"Deditos Mini Soya - Del Origen x 10 uds","brand":"Del Origen","cat":"Horneados","price":45300,"slug":"deditos-mini-soya-del-origen-x-10-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89020203.jpg"},{"sku":"79079983","name":"Batiwaffle Tradicional - Bataticafit x 510 g","brand":"Bataticafit","cat":"Horneados","price":28600,"slug":"batiwaffle-tradicional-bataticafit-x-510-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079983.jpg"},{"sku":"79180382","name":"Batitajaditas - Bataticafit X 500 g","brand":"Bataticafit","cat":"Horneados","price":22800,"slug":"batitajaditas-bataticafit-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/19996.jpg"},{"sku":"89022788","name":"Deditos Mini Cheddar - Del Origen x 10 uds","brand":"Del Origen","cat":"Horneados","price":48500,"slug":"deditos-mini-cheddar-del-origen-x-10-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89022788.jpg"},{"sku":"79076456","name":"Mañolitas Veganas - Sierra Flor x 12 uds","brand":"Sierra Flor","cat":"Horneados","price":39900,"slug":"manolitas-veganas-sierra-flor-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076456.jpg"},{"sku":"79077385","name":"Pio Pio - Piccolini x 200 g","brand":"Piccolini","cat":"Horneados","price":33000,"slug":"pio-pio-piccolini-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077385.jpg"},{"sku":"79077347","name":"Luna Lunera - Piccolini x 200 g","brand":"Piccolini","cat":"Horneados","price":28000,"slug":"luna-lunera-piccolini-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077347.jpg"},{"sku":"89027240","name":"Manolines - Manolines x 420 g","brand":"Manolines","cat":"Horneados","price":37900,"slug":"manolines-manolines-x-420-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/mezze_pequeno.png"},{"sku":"79077361","name":"Pin Pón - Piccolini x 200 g","brand":"Piccolini","cat":"Horneados","price":31200,"slug":"pin-pon-piccolini-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077361.jpg"}]],
+  ["Mezclas en Polvo",[{"sku":"79182260","name":"Base de Marañones - Krima x 200 g","brand":"Krima","cat":"Mezclas en Polvo","price":45500,"slug":"base-de-maranones-krima-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0532f7bb-4274-49a8-84cf-6d5c9ef30f57.jpg"},{"sku":"89100026","name":"Mezcla Pancakes Y Waffles Almendra Vainilla - Paranice x 285 g","brand":"Paranice","cat":"Mezclas en Polvo","price":45650,"slug":"mezcla-pancakes-y-waffles-almendra-vainilla-paranice-x-285-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/17b649d0-eb1f-48f4-96d9-100eecdf3c4c.jpg"},{"sku":"79181598","name":"Proteina Vegetal - Naturela X 180 g","brand":"Naturela","cat":"Mezclas en Polvo","price":43850,"slug":"proteina-vegetal-naturela-x-180-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ff6303c9-2fe9-40de-8110-18f3402a29b9.jpg"},{"sku":"79181597","name":"Polvo Acai - Naturela X 60 g","brand":"Naturela","cat":"Mezclas en Polvo","price":33850,"slug":"polvo-acai-naturela-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4b42f3e1-e212-4982-838b-0f68619d1f46.jpg"},{"sku":"79181599","name":"Pink Latte - Naturela X 100 g","brand":"Naturela","cat":"Mezclas en Polvo","price":37550,"slug":"pink-latte-naturela-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d4086a02-a23f-46d2-ad1f-9ca32db4a166.jpg"},{"sku":"79181601","name":"Fibra Vegetal - Naturela X 120 g","brand":"Naturela","cat":"Mezclas en Polvo","price":35000,"slug":"fibra-vegetal-naturela-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6d1ec298-d0e5-40aa-9613-576864acacff.jpg"},{"sku":"79073554","name":"Mezcla para Buñuelo - Konfyt x 180 g","brand":"Konfyt","cat":"Mezclas en Polvo","price":10800,"slug":"mezcla-para-bunuelo-konfyt-x-180-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073554.jpg"}]],
+  ["Mieles y Endulzantes",[{"sku":"stevia250","name":"Stevia Líquida - fithub x 250 ml","brand":"Fithub","cat":"Mieles y Endulzantes","price":24500,"slug":"stevia-liquida-fithub-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/steviamarcapropia.png"},{"sku":"79182028","name":"Miel Pura la Cumbre x 180 ml","brand":"La Cumbre","cat":"Mieles y Endulzantes","price":19900,"slug":"miel-pura-la-cumbre-x-180-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/906454ac-2828-4463-847e-2e5d2e6ce050.jpg"},{"sku":"79075411","name":"Sirope de Mapple Natural - Viva Natur x 250 ml","brand":"Viva Natur","cat":"Mieles y Endulzantes","price":54200,"slug":"sirope-de-mapple-natural-viva-natur-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79075411.jpg"},{"sku":"79026253","name":"Endulzante Natural Monkfruit - Vitad x 200 g","brand":"Vitad","cat":"Mieles y Endulzantes","price":31000,"slug":"endulzante-natural-monkfruit-vitad-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79026253.jpg"},{"sku":"79182308","name":"Syrup Maple Caramelo - Viva Natur x 250 ml","brand":"Viva Natur","cat":"Mieles y Endulzantes","price":54200,"slug":"syrup-maple-caramelo-viva-natur-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e8045dc1-e30c-4ef1-9587-ade183207c52.jpg"},{"sku":"79182433","name":"Miel Picante Alto - Oh Honey x 350 g","brand":"Oh Honey","cat":"Mieles y Endulzantes","price":32650,"slug":"miel-picante-alto-oh-honey-x-350-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/59c2a2f3-283b-4664-a01c-126f09dccf9b.jpg"},{"sku":"79072441","name":"Endulzante Golden - Lakanto x 90 g","brand":"Lakanto","cat":"Mieles y Endulzantes","price":31800,"slug":"endulzante-golden-lakanto-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072441.jpg"},{"sku":"79181293","name":"Pimienta Negra Molida - Badia X 56.7 g","brand":"Badia","cat":"Mieles y Endulzantes","price":24500,"slug":"pimienta-negra-molida-badia-x-567-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/33549939-de55-40ad-8886-73414cbed01e.png"},{"sku":"79181291","name":"Canela en Polvo Orgánica - Badia X 56.7 g","brand":"Badia","cat":"Mieles y Endulzantes","price":24980,"slug":"canela-en-polvo-organica-badia-x-567-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/fcf6614c-b156-4a99-bb43-7d672b28e42d.png"},{"sku":"79182528","name":"Miel de Trufa - Sabatino x 128 g","brand":"Sabatino","cat":"Mieles y Endulzantes","price":122900,"slug":"miel-de-trufa-sabatino-x-128-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7ba1788e-d1ce-4c12-a7c0-6b7a2fe0fa80.jpg"}]],
+  ["Pastas",[{"sku":"79182093","name":"Spaghetti - Natural Heaven x 255 g","brand":"Natural Heaven","cat":"Pastas","price":18700,"slug":"spaghetti-natural-heaven-x-255-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1a4cb838-cbd4-48f3-ba40-c11d157491e3.png"},{"sku":"79034746","name":"Pasta de Dátiles - Al Barakah Dates x 500 g","brand":"Al Barakah Dates","cat":"Pastas","price":25600,"slug":"pasta-de-datiles-al-barakah-dates-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79034746.jpg"},{"sku":"79021487","name":"Pasta de Arroz Integral Mini Fusilli - El Dorado x 250 g","brand":"Alimentos el Dorado Sas","cat":"Pastas","price":9200,"slug":"pasta-de-arroz-integral-mini-fusilli-el-dorado-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/arroz_integram_mini_fusili.png"},{"sku":"79021494","name":"Pasta de Arroz Integral Spaghetti - El Dorado x 250 g","brand":"Alimentos el Dorado Sas","cat":"Pastas","price":9900,"slug":"pasta-de-arroz-integral-spaghetti-el-dorado-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/spagueti_.png"},{"sku":"79076036","name":"Conchitas Lenteja Amarilla - El Dorado x 250 g","brand":"Alimentos el Dorado Sas","cat":"Pastas","price":17500,"slug":"conchitas-lenteja-amarilla-el-dorado-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076036.jpg"},{"sku":"79079945","name":"Fettucine Espinaca - IL Castello x 250 g","brand":"IL Castello","cat":"Pastas","price":15700,"slug":"fettucine-espinaca-il-castello-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079945.jpg"},{"sku":"79075053","name":"Pasta con Quinua Penne - Equinat x 250 g","brand":"Equinat","cat":"Pastas","price":11200,"slug":"pasta-con-quinua-penne-equinat-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79075053.jpg"},{"sku":"79079341","name":"Pasta Fusilli Sagú - Quinoa - Mauka x 227 g","brand":"Mauka","cat":"Pastas","price":15800,"slug":"pasta-fusilli-sagu-quinoa-mauka-x-227-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079341.jpg"},{"sku":"79181390","name":"Tallarín sin Gluten - Gallo X 450 g","brand":"Gallo","cat":"Pastas","price":17600,"slug":"tallarin-sin-gluten-gallo-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/31e24f5b-17dc-46dc-9ac6-9416d6ed7e73.jpg"},{"sku":"79181391","name":"Plumas sin Gluten - Gallo X 450 g","brand":"Gallo","cat":"Pastas","price":17600,"slug":"plumas-sin-gluten-gallo-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7ae16109-ef56-48a9-961e-51b16e8f8640.jpg"},{"sku":"79181393","name":"Hélices Sin Gluten - Gallo X 450 g","brand":"Gallo","cat":"Pastas","price":17600,"slug":"helices-sin-gluten-gallo-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/37aa60ae-e7b9-43c2-b5a8-41e7740408cc.jpg"},{"sku":"79079952","name":"Fettucine - IL Castello x 250 g","brand":"IL Castello","cat":"Pastas","price":15700,"slug":"fettucine-il-castello-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079952.jpg"},{"sku":"79079976","name":"Penne - IL Castello x 250 g","brand":"IL Castello","cat":"Pastas","price":15700,"slug":"penne-il-castello-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079976.jpg"},{"sku":"79181389","name":"Spaguetti sin Gluten - Gallo X 450 g","brand":"Gallo","cat":"Pastas","price":17600,"slug":"spaguetti-sin-gluten-gallo-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/719df1cf-efe2-444a-92d4-bb1179ad9794.jpg"},{"sku":"79040037","name":"Spaghetti con Quinua - Equinat x 250 g","brand":"Equinat","cat":"Pastas","price":12750,"slug":"spaghetti-con-quinua-equinat-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/quinua_.png"}]],
+  ["Salsas y Aderezos",[{"sku":"89017807","name":"Pasta de Tomate - Villa Santos x 480 g","brand":"Villa Santos","cat":"Salsas y Aderezos","price":23950,"slug":"pasta-de-tomate-villa-santos-x-480-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89017807.jpg"},{"sku":"89017319","name":"Mostaza Hierbas - Hacienda Gourmet x 380 g","brand":"Hacienda Gourmet","cat":"Salsas y Aderezos","price":19800,"slug":"mostaza-hierbas-hacienda-gourmet-x-380-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89017319.jpg"},{"sku":"79182536","name":"Caldo De Hueso De Res - Iki Soul x 500 ml","brand":"Iki Soul","cat":"Salsas y Aderezos","price":51900,"slug":"caldo-de-hueso-de-res-iki-soul-x-500-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a713371b-7043-4d08-9922-6e0fb9b958d2.jpg"},{"sku":"79071015","name":"Salsa de Tomate Tradicional - Villa Santos x 350 g","brand":"Villa Santos","cat":"Salsas y Aderezos","price":22200,"slug":"salsa-de-tomate-tradicional-villa-santos-x-350-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79071015.jpg"},{"sku":"79182778","name":"Coconut Secret Aminos x 237 ml","brand":"Coconut Secret","cat":"Salsas y Aderezos","price":55990,"slug":"coconut-secret-aminos-x-237-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/24b6c266-6ae8-4c9f-beb9-eb2b27cf2df4.jpg"},{"sku":"79182983","name":"Buffalo Wings - Mrs. Taste x 335 g","brand":"Mrs. Taste","cat":"Salsas y Aderezos","price":41000,"slug":"buffalo-wings-mrs-taste-x-335-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/11934552-3334-4303-87b5-e272f32516c8.jpg"},{"sku":"79182982","name":"American Burger - Mrs. Taste x 335 g","brand":"Mrs. Taste","cat":"Salsas y Aderezos","price":41000,"slug":"american-burger-mrs-taste-x-335-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/91bfa3f5-aa2f-42aa-aab2-448e50bf85ba.jpg"},{"sku":"79180647","name":"Ranch - Mrs. Taste X 300 ml","brand":"Mrs. Taste","cat":"Salsas y Aderezos","price":36800,"slug":"ranch-mrs-taste-x-300-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e54aefb2-a6d7-431a-b2e1-af24cc6dc8ff.jpg"},{"sku":"79180649","name":"Strawberry Syrup - Mrs. Taste X 335 g","brand":"Mrs. Taste","cat":"Salsas y Aderezos","price":36800,"slug":"strawberry-syrup-mrs-taste-x-335-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/92a005d2-d33b-41fb-963e-f2943592b680.jpg"},{"sku":"79182419","name":"Salsa de Ajo Cremoso Gourmet – Piscú x 230g","brand":"Piscú","cat":"Salsas y Aderezos","price":24950,"slug":"salsa-de-ajo-cremoso-gourmet-piscu-x-230g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a632086a-180c-4f57-9d7e-2054753cbf7e.jpg"},{"sku":"79182421","name":"Salsa Cilantro Gourmet – Piscú x 230g","brand":"Piscú","cat":"Salsas y Aderezos","price":24950,"slug":"salsa-cilantro-gourmet-piscu-x-230g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/622108df-b8ae-44d0-9e93-cf76ac14d521.jpg"},{"sku":"79182981","name":"Honey Mustard - Mrs. Taste x 335 g","brand":"Mrs. Taste","cat":"Salsas y Aderezos","price":41000,"slug":"honey-mustard-mrs-taste-x-335-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c31dcd93-8fb0-4099-a612-04283fba48e0.jpg"},{"sku":"79075435","name":"Mostaza - Piatto x 200 g","brand":"Piatto","cat":"Salsas y Aderezos","price":18900,"slug":"mostaza-piatto-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79075435.jpg"},{"sku":"79181812","name":"Vinagre De Sidra De Manzana - Colavita X 500 ml","brand":"Colavita","cat":"Salsas y Aderezos","price":23354,"slug":"vinagre-de-sidra-de-manzana-colavita-x-500-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/09600f6d-51d0-41c0-a860-944f9786440b.jpg"},{"sku":"79180643","name":"Mostaza - Mrs. Taste X 350 g","brand":"Mrs. Taste","cat":"Salsas y Aderezos","price":36800,"slug":"mostaza-mrs-taste-x-350-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f414fb0c-bf53-4d18-8aed-1f30f0d16412.jpg"},{"sku":"79182422","name":"Salsa Picante Chipotle – Piscú x 230g","brand":"Piscú","cat":"Salsas y Aderezos","price":24950,"slug":"salsa-picante-chipotle-piscu-x-230g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a2cbb9fe-405a-4f38-9fb1-6057d1320980.jpg"},{"sku":"79181796","name":"Salsa Teriyaki Con Ajojonli - Kari X 290 g","brand":"Kari","cat":"Salsas y Aderezos","price":16600,"slug":"salsa-teriyaki-con-ajojonli-kari-x-290-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/58c4c808-395d-40e3-8edd-f40577baf85b.jpg"},{"sku":"79182424","name":"Salsa Picante Carolina Reaper – Piscú x 230g","brand":"Piscú","cat":"Salsas y Aderezos","price":24950,"slug":"salsa-picante-carolina-reaper-piscu-x-230g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5b023c06-50d7-4ea2-b341-14e838017870.jpg"},{"sku":"79181794","name":"Mostaza - Kari X 370 g","brand":"Kari","cat":"Salsas y Aderezos","price":20100,"slug":"mostaza-kari-x-370-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/53d433fa-6ce9-4048-9555-3bc5006484d0.jpg"},{"sku":"79181810","name":"Vinagre De Vino Rojo - Colavita X 500 ml","brand":"Colavita","cat":"Salsas y Aderezos","price":16950,"slug":"vinagre-de-vino-rojo-colavita-x-500-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/21120423-66a4-4aa0-8c70-15111cc2e8f7.jpg"},{"sku":"79181811","name":"Vinagre Balsamico - Colavita X 250 ml","brand":"Colavita","cat":"Salsas y Aderezos","price":23200,"slug":"vinagre-balsamico-colavita-x-250-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/69247f3c-d16b-4154-a5fe-8815b9250586.jpg"},{"sku":"79181830","name":"Salsa Pasta Tradicional - Hunt´s X 680 g","brand":"Hunt´s","cat":"Salsas y Aderezos","price":27519,"slug":"salsa-pasta-tradicional-hunt-s-x-680-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/23216524-2f57-4535-aaed-728aabe22b48.jpg"},{"sku":"79181823","name":"Pasta De Tomate - Hunt´s X 340.2 g","brand":"Hunt´s","cat":"Salsas y Aderezos","price":26600,"slug":"pasta-de-tomate-hunt-s-x-3402-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b96ebd91-42b5-4d2e-b078-7b586c32311e.jpg"},{"sku":"79182072","name":"Vinagre Natural de Manzana - La Chila x 477 ml","brand":"La Chila","cat":"Salsas y Aderezos","price":34700,"slug":"vinagre-natural-de-manzana-la-chila-x-477-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9e4aa335-d10f-4306-a2a3-8b18d122580c.png"},{"sku":"79182074","name":"Vinagre de Manzana con Jengibre y Pimiento Cayena - La Chila x 400 ml","brand":"La Chila","cat":"Salsas y Aderezos","price":32300,"slug":"vinagre-de-manzana-con-jengibre-y-pimiento-cayena-la-chila-x-400-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e7b0c376-9973-445b-a7c5-6ff6920369f6.png"},{"sku":"79182420","name":"Salsa Maracuyá Gourmet – Piscú x 230g","brand":"Piscú","cat":"Salsas y Aderezos","price":24950,"slug":"salsa-maracuya-gourmet-piscu-x-230g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/63120d72-4582-48b9-9fd1-e1dd359d7a26.jpg"},{"sku":"79058063","name":"Salsa Honey Mustard Habanero - Melinda\'s x 355 ml","brand":"Melinda\'s","cat":"Salsas y Aderezos","price":40350,"slug":"salsa-honey-mustard-habanero-melindas-x-355-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79058063.jpg"},{"sku":"79181985","name":"Vinagre de Cidra con Manzana - Yayote x 500ml","brand":"Yayote","cat":"Salsas y Aderezos","price":37700,"slug":"vinagre-de-cidra-con-manzana-yayote-x-500ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ab9d3543-047c-4617-8d76-5571468f6670.jpg"},{"sku":"79181987","name":"Vinagre de Cidra con Ajo Negro - Yayote x 500ml","brand":"Yayote","cat":"Salsas y Aderezos","price":39950,"slug":"vinagre-de-cidra-con-ajo-negro-yayote-x-500ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/72775376-c0dd-4b9b-b423-1ce207239ea9.jpg"},{"sku":"79182075","name":"Vinagre de Manzana con Aloe Vera más té Verde y Canela - La Chila x 400 ml","brand":"La Chila","cat":"Salsas y Aderezos","price":34600,"slug":"vinagre-de-manzana-con-aloe-vera-mas-te-verde-y-canela-la-chila-x-400-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/42d9ed72-5be0-4c53-9040-1dbf0773c949.png"}]],
+  ["Sazonadores",[{"sku":"79072311","name":"Sal Rosada del Himalaya - Fumage Gourmet x 400 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":18900,"slug":"sal-rosada-del-himalaya-fumage-gourmet-x-400-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072311.jpg"},{"sku":"89100043","name":"Sal Marina Importada - Fumage x 453 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":18600,"slug":"sal-marina-importada-fumage-x-453-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8979c4f0-77dc-4fb3-be07-5bc1d4307af3.jpg"},{"sku":"79072274","name":"Sal Rosada del Himalaya con Ajo y Perejil - Fumage Gourmet x 80 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":11800,"slug":"sal-rosada-del-himalaya-con-ajo-y-perejil-fumage-gourmet-x-80-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072274.jpg"},{"sku":"79072267","name":"Sal Rosada del Himalaya Paprika - Fumage Gourmet x 90 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":11800,"slug":"sal-rosada-del-himalaya-paprika-fumage-gourmet-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072267.jpg"},{"sku":"79072342","name":"Sal Rosada del Himalaya Italian Style - Fumage Gourmet x 70 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":11800,"slug":"sal-rosada-del-himalaya-italian-style-fumage-gourmet-x-70-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072342.jpg"},{"sku":"79072298","name":"Pimienta Negra - Fumage Gourmet x 45 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":25900,"slug":"pimienta-negra-fumage-gourmet-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072298.jpg"},{"sku":"79072281","name":"Pimienta Mixta - Fumage Gourmet x 40 g","brand":"Fumage Gourmet","cat":"Sazonadores","price":25900,"slug":"pimienta-mixta-fumage-gourmet-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072281.jpg"},{"sku":"79182524","name":"Queso Pecorino Trufado Rallado - Sabatino x 60 g","brand":"Sabatino","cat":"Sazonadores","price":109900,"slug":"queso-pecorino-trufado-rallado-sabatino-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/61f658b1-168b-4f33-9fd6-44ea0a92fc7f.jpg"},{"sku":"79182525","name":"Sal Marina Trufada - Sabatino x 113 g","brand":"Sabatino","cat":"Sazonadores","price":115500,"slug":"sal-marina-trufada-sabatino-x-113-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/07f3741d-64f0-41e0-be6d-bd48ef59f39d.jpg"},{"sku":"79026949","name":"Albahaca - Badia x 21,16 g","brand":"Badia","cat":"Sazonadores","price":14000,"slug":"albahaca-badia-x-2116-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/basil_badia_.png"}]],
+  ["Super Alimentos",[{"sku":"79034937","name":"Alim Nat. 100% Curcuma - Naturela x 60 g","brand":"Naturela","cat":"Super Alimentos","price":19800,"slug":"alim-nat-100-curcuma-naturela-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/curcuma_en_polvo.png"},{"sku":"79034982","name":"Alim. Polvo Spirulina - Naturela x 100 g","brand":"Naturela","cat":"Super Alimentos","price":55850,"slug":"alim-polvo-spirulina-naturela-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/spirulina_.png"}]],
+  ["Té e Infusiones",[{"sku":"79182568","name":"Infusiones Surtidas Spirute 3 Sabores - Naturela x 20Und","brand":"Naturela","cat":"Té e Infusiones","price":19950,"slug":"infusiones-surtidas-spirute-3-sabores-naturela-x-20und","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e392971f-cbe0-43d6-ba5d-2f0c0e436d07.jpg"},{"sku":"79036504","name":"Infusión de Acaí - Selvática x 12 uds","brand":"Selvática","cat":"Té e Infusiones","price":32000,"slug":"infusion-de-acai-selvatica-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/acai_x_12_.png"},{"sku":"79036528","name":"Infusión de Camu/Camu - Selvática x 12 uds","brand":"Selvática","cat":"Té e Infusiones","price":31700,"slug":"infusion-de-camucamu-selvatica-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/camu_camu_x_12.png"},{"sku":"79036535","name":"Infusión de Copoazú - Selvática x 12 uds","brand":"Selvática","cat":"Té e Infusiones","price":31350,"slug":"infusion-de-copoazu-selvatica-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/copoazu_x_12_.png"},{"sku":"79182567","name":"Spirute Purificante - Naturela x 21 g","brand":"Naturela","cat":"Té e Infusiones","price":14350,"slug":"spirute-purificante-naturela-x-21-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/266ea785-8bfd-4b43-a1ba-2780730d9303.jpg"},{"sku":"79034883","name":"Té Dorado Cúrcuma Spiruté  - Naturela X 20 Unds","brand":"Naturela","cat":"Té e Infusiones","price":26850,"slug":"te-dorado-curcuma-spirute-naturela-x-20-unds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/te_curcuma_.png"}]],
+  ["Tostadas",[{"sku":"79180942","name":"Pita Chips Canela - Somos Pita X 150 g","brand":"Somos Pita","cat":"Tostadas","price":8900,"slug":"pita-chips-canela-somos-pita-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2e35e1a3-1d6a-42c8-ac9c-e7a0913f3f73.jpg"},{"sku":"79182636","name":"Tostada con Ajo - Susanita x 90 g","brand":"Susanita","cat":"Tostadas","price":5200,"slug":"tostada-con-ajo-susanita-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/11479dd7-aed5-4ece-b9a6-f96ecd829f90.jpg"},{"sku":"79182635","name":"Tostada de Mantequilla - Susanita x 90 g","brand":"Susanita","cat":"Tostadas","price":5000,"slug":"tostada-de-mantequilla-susanita-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/965a817a-68fa-43f4-bfdf-e1ab729c5fb1.jpg"}]],
+  ["Wrap",[{"sku":"89022290","name":"Tortillas de Almendras - fithub x 107 g","brand":"Fithub","cat":"Wrap","price":30800,"slug":"tortillas-de-almendras-fithub-x-107-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8902229066.jpg"},{"sku":"79182770","name":"Wrap Integral de Espinaca - Fithub x 5 uds","brand":"Fithub","cat":"Wrap","price":21300,"slug":"wrap-integral-de-espinaca-fithub-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/153f9427-fe4e-48d7-a23c-fa799fb132a7.jpg"}]],
+  ["Aguas",[{"sku":"79181139","name":"Agua Natural - Cristal X 600 ml","brand":"Cristal","cat":"Aguas","price":2151,"slug":"agua-natural-cristal-x-600-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9854ec25-41de-4971-9dc4-6e0206dec521.jpg"},{"sku":"79072946","name":"Agua Saborizada Maracuyá - Cool Drink x 340 ml","brand":"Cool Drink","cat":"Aguas","price":3400,"slug":"agua-saborizada-maracuya-cool-drink-x-340-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072946.jpg"}]],
+  ["Bebidas de Café",[{"sku":"79182728","name":"Café Tierras de Ata - Casa Landino x 340 g","brand":"Casa Landino","cat":"Bebidas de Café","price":77900,"slug":"cafe-tierras-de-ata-casa-landino-x-340-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d48be920-0f39-46f3-a0b3-10b0d17c3877.jpg"},{"sku":"79182731","name":"Café Guardian de la Montaña - Casa Landino x 250 g","brand":"Casa Landino","cat":"Bebidas de Café","price":69490,"slug":"cafe-guardian-de-la-montana-casa-landino-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5d0f5b93-9a6f-4219-90cb-2d7e26775dbc.jpg"},{"sku":"79182727","name":"Café Miel de Monte - Casa Landino x 340 g","brand":"Casa Landino","cat":"Bebidas de Café","price":125850,"slug":"cafe-miel-de-monte-casa-landino-x-340-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/21a63f4c-3b3d-4981-829d-a8dd90f6baf5.jpg"},{"sku":"79182729","name":"Café Israel Hernandez - Casa Landino x 120 g","brand":"Casa Landino","cat":"Bebidas de Café","price":54900,"slug":"cafe-israel-hernandez-casa-landino-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a9d8c79a-ab95-4d5f-a682-443dc2b02033.jpg"},{"sku":"79182730","name":"Café Eco del Valle - Casa Landino x 340 g","brand":"Casa Landino","cat":"Bebidas de Café","price":78300,"slug":"cafe-eco-del-valle-casa-landino-x-340-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b371d209-f481-43e7-9652-a9ca08df970a.jpg"},{"sku":"79182732","name":"Café Bruma Andina Decaf - Casa Landino x 500 g","brand":"Casa Landino","cat":"Bebidas de Café","price":115390,"slug":"cafe-bruma-andina-decaf-casa-landino-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/23a583c6-de6f-4a78-9b42-ac47c77a0411.jpg"}]],
+  ["Bebidas Fermentadas",[{"sku":"89099997","name":"Kombucha de Mango - Nexba x 330 ml","brand":"Nexba","cat":"Bebidas Fermentadas","price":13690,"slug":"kombucha-de-mango-nexba-x-330-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/10cb7dd6-391d-4dfe-982d-1fd6ceec0df8.jpg"},{"sku":"89099999","name":"Kombucha Ginger y Limón - Nexba x 330 ml","brand":"Nexba","cat":"Bebidas Fermentadas","price":13690,"slug":"kombucha-ginger-y-limon-nexba-x-330-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/87ff4824-56bf-4045-9ae2-174759f6025d.jpg"},{"sku":"89099998","name":"Kombucha Mixed Berry - Nexba x 330 ml","brand":"Nexba","cat":"Bebidas Fermentadas","price":13690,"slug":"kombucha-mixed-berry-nexba-x-330-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ddccf92d-a77c-4b90-a6ee-473f230dd499.jpg"},{"sku":"89100000","name":"Agua Kéfir Fresa y Durazno - Nexba x 330 ml","brand":"Nexba","cat":"Bebidas Fermentadas","price":13690,"slug":"agua-kefir-fresa-y-durazno-nexba-x-330-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/86bea085-6f29-4864-a1a9-0180487a7101.jpg"},{"sku":"89100001","name":"Agua Kéfir Arándanos y Vainilla - Nexba x 330 ml","brand":"Nexba","cat":"Bebidas Fermentadas","price":13690,"slug":"agua-kefir-arandanos-y-vainilla-nexba-x-330-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2074a9aa-88cb-4101-8352-a626f7210ba8.jpg"}]],
+  ["Bebidas Vegetales",[{"sku":"79019231","name":"Bebida de Almendra sin Azúcar - Almendrola x 1 L","brand":"Almendrola","cat":"Bebidas Vegetales","price":17000,"slug":"bebida-de-almendra-sin-azucar-almendrola-x-1-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5_zkZEaF6.png"},{"sku":"79019248","name":"Bebida de Almendra sin Azúcar Vainilla - Almendrola x 1 L","brand":"Almendrola","cat":"Bebidas Vegetales","price":18500,"slug":"bebida-de-almendra-sin-azucar-vainilla-almendrola-x-1-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8989.png"},{"sku":"79071415","name":"Kefir de Agua Vida - Viiva x 280 ml","brand":"Viiva","cat":"Bebidas Vegetales","price":8900,"slug":"kefir-de-agua-vida-viiva-x-280-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0053.jpg"},{"sku":"79037563","name":"NotMilk Low Fat - NotCo x 1 L","brand":"NotCo","cat":"Bebidas Vegetales","price":21500,"slug":"notmilk-low-fat-notco-x-1-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/676f7d1d-fb0b-4d3c-8156-87cd2eb43bb2.jpg"},{"sku":"89100149","name":"Bebida Vegetal Low Fat - NotCo x 3 uds","brand":"NotCo","cat":"Bebidas Vegetales","price":51600,"slug":"bebida-vegetal-low-fat-notco-x-3-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1c1998ee-eef7-4191-80fa-b4c2038cbe62.jpg"}]],
+  ["Energizantes",[{"sku":"79181995","name":"Selvit Energy Seltzer Durazno - Selvit x 310 ml","brand":"Selvit","cat":"Energizantes","price":8900,"slug":"selvit-energy-seltzer-durazno-selvit-x-310-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8e0baab4-3393-4c2e-aa06-fcd942843b93.jpg"},{"sku":"79180338","name":"Green Passion - Mahati x 295 ml","brand":"Mahati","cat":"Energizantes","price":10500,"slug":"green-passion-mahati-x-295-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8481cbff-0d26-41a5-9a1d-67a94c0233e8.png"},{"sku":"79181993","name":"Selvit Energy Seltzer Kiwi Guayaba - Selvit x 310 ml","brand":"Selvit","cat":"Energizantes","price":8900,"slug":"selvit-energy-seltzer-kiwi-guayaba-selvit-x-310-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6dd0f63a-1ea0-40cb-b2a3-d75d1cbab187.jpg"},{"sku":"79182979","name":"Energy Vice City - Redcon 1 x 473 ml","brand":"Redcon 1","cat":"Energizantes","price":17000,"slug":"energy-vice-city-redcon-1-x-473-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/15c32fc9-8ea9-4167-b845-f17dee28b106.jpg"},{"sku":"79182980","name":"Energy Icy Blue Lemonade - Redcon 1 x 473 ml","brand":"Redcon 1","cat":"Energizantes","price":17000,"slug":"energy-icy-blue-lemonade-redcon-1-x-473-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9cbde9fe-8e0a-49cd-a700-733309223e8e.jpg"}]],
+  ["Gomas Hidratantes",[{"sku":"79180406","name":"Gomas de Melena de Leon y Maca - OA Foods X 210 g","brand":"Oa Foods","cat":"Gomas Hidratantes","price":95900,"slug":"gomas-de-melena-de-leon-y-maca-oa-foods-x-210-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0028.jpg"},{"sku":"79180571","name":"Gomas Lights Out Frasco - Gooms X 150 g","brand":"Gooms","cat":"Gomas Hidratantes","price":77800,"slug":"gomas-lights-out-frasco-gooms-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0044.jpg"},{"sku":"79180574","name":"Gomas Mental Ease Frasco - Gooms X 150 g","brand":"Gooms","cat":"Gomas Hidratantes","price":77800,"slug":"gomas-mental-ease-frasco-gooms-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0045.jpg"},{"sku":"79180572","name":"Gomas How Pretty Frasco - Gooms X 150 g","brand":"Gooms","cat":"Gomas Hidratantes","price":77800,"slug":"gomas-how-pretty-frasco-gooms-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0043.jpg"},{"sku":"79180573","name":"Gomas Gut Health Frasco - Gooms X 150 g","brand":"Gooms","cat":"Gomas Hidratantes","price":77800,"slug":"gomas-gut-health-frasco-gooms-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0042.jpg"},{"sku":"79180407","name":"Gomas de Ganoderma Lucidum - OA Foods X 210 g","brand":"Oa Foods","cat":"Gomas Hidratantes","price":95900,"slug":"gomas-de-ganoderma-lucidum-oa-foods-x-210-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0029.jpg"}]],
+  ["Té Líquido",[{"sku":"79020893","name":"Té Blanco Mangostino - Hatsu x 400 ml","brand":"Hatsu","cat":"Té Líquido","price":5524,"slug":"te-blanco-mangostino-hatsu-x-400-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79020893.jpg"},{"sku":"79020886","name":"Té Verde Yuzu Camomile - Hatsu x 400 ml","brand":"Hatsu","cat":"Té Líquido","price":5524,"slug":"te-verde-yuzu-camomile-hatsu-x-400-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79020889.jpg"},{"sku":"79034364","name":"Té sabor a Fresa Limón - Ekii x 400 ml","brand":"Ekii","cat":"Té Líquido","price":5700,"slug":"te-sabor-a-fresa-limon-ekii-x-400-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79034364.jpg"}]],
+  ["Chicharrones",[{"sku":"79180861","name":"Chicharrón Sal y Vinagre - Bayter X 100 g","brand":"Bayter","cat":"Chicharrones","price":22000,"slug":"chicharron-sal-y-vinagre-bayter-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f2ab505d-29cf-41ea-a1ac-e9e248da3fba.jpg"},{"sku":"79182229","name":"Chicharrin Tomate - Bencos X 40 g","brand":"Bencos","cat":"Chicharrones","price":3800,"slug":"chicharrin-tomate-bencos-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/56d285e4-f8bf-4551-abe9-0d8ed03f2a74.jpg"},{"sku":"79182226","name":"Chicharrin BBQ - Bencos X 40 g","brand":"Bencos","cat":"Chicharrones","price":3800,"slug":"chicharrin-bbq-bencos-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8bc779ee-e573-430b-a0d0-5f9dc6e4e310.jpg"},{"sku":"79182224","name":"Chicharrin Natural - Bencos X 35 g","brand":"Bencos","cat":"Chicharrones","price":3800,"slug":"chicharrin-natural-bencos-x-35-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9873d5b9-c051-4e91-a422-c6f51ab6edf7.jpg"},{"sku":"79182227","name":"Chicharrin Jalapeño - Bencos x 40 g","brand":"Bencos","cat":"Chicharrones","price":3800,"slug":"chicharrin-jalapeno-bencos-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a98df436-138b-4311-a6dd-5447cfb6f424.jpg"}]],
+  ["Chips",[{"sku":"79070010","name":"Mix BBQ - Krost x 45 g","brand":"Krost","cat":"Chips","price":5500,"slug":"mix-bbq-krost-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7907001.png"},{"sku":"79079754","name":"Batatas de Sal y Vinagre - Kamochips x 45 g","brand":"Kamochips","cat":"Chips","price":7200,"slug":"batatas-de-sal-y-vinagre-kamochips-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079754_oPNHvDB.jpg"},{"sku":"79060981","name":"Mix Pimienta - Krost x 45 g","brand":"Krost","cat":"Chips","price":5500,"slug":"mix-pimienta-krost-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7906098.png"},{"sku":"79070041","name":"Mix BBQ - Krost x 6 und","brand":"Krost","cat":"Chips","price":31900,"slug":"mix-bbq-krost-x-6-und","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070034_4FpqZWq.jpg"},{"sku":"79077910","name":"Batata Crema Jalapeño - Kamochips x 45 g","brand":"Kamochips","cat":"Chips","price":7200,"slug":"batata-crema-jalapeno-kamochips-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077910.jpg"},{"sku":"79075589","name":"Chips de Arroz con Proteína de Quinoa y Probióticos - Quinoa Club x 6 uds","brand":"Quinoa Club","cat":"Chips","price":19500,"slug":"chips-de-arroz-con-proteina-de-quinoa-y-probioticos-quinoa-club-x-6-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79075589.jpg"}]],
+  ["Crispetas",[{"sku":"89029046","name":"Crispeta Sal Marina - fithub x 36 g","brand":"Fithub","cat":"Crispetas","price":4300,"slug":"crispeta-sal-marina-fithub-x-36-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89029046_xxFiu8B.png"},{"sku":"89016114","name":"Crispeta Dulce Saladita - Delipop x 48 g","brand":"Delipop","cat":"Crispetas","price":4500,"slug":"crispeta-dulce-saladita-delipop-x-48-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Crispeta_Dulce_Saladita_-_48_g.png"},{"sku":"79071001","name":"Crispetas Dulces - Frunch x 200 g","brand":"Frunch","cat":"Crispetas","price":25500,"slug":"crispetas-dulces-frunch-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79071001.jpg"},{"sku":"79182500","name":"Crispetas Saladas Frutos Y Semillas - Frutos & Semillas x 150 g","brand":"Frutos & Semillas","cat":"Crispetas","price":13500,"slug":"crispetas-saladas-frutos-y-semillas-frutos-semillas-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4c90e782-c047-4b7b-8e8a-1634d08a6d30.jpg"}]],
+  ["Papitas",[{"sku":"8901697","name":"Papas BBQ Ahumado - fithub x 6 und","brand":"Fithub","cat":"Papitas","price":19700,"slug":"papas-bbq-ahumado-fithub-x-6-und","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8901697.png"},{"sku":"890193","name":"Papas BBQ Ahumado - fithub x 25 g","brand":"Fithub","cat":"Papitas","price":3400,"slug":"papas-bbq-ahumado-fithub-x-25-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/890193.png"},{"sku":"89022306","name":"Papa Crema y Cebolla - Monterojo x 25 g","brand":"Monterojo","cat":"Papitas","price":3300,"slug":"papa-crema-y-cebolla-monterojo-x-25-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89022306.jpg"},{"sku":"79074940","name":"Papas Lima Limón - Monterojo x 100 g","brand":"Monterojo","cat":"Papitas","price":13300,"slug":"papas-lima-limon-monterojo-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79074940.jpg"}]],
+  ["Platanitos",[{"sku":"89019351","name":"Plátanos Verde Sal Marina  - Monterojo x 30 g","brand":"Monterojo","cat":"Platanitos","price":3000,"slug":"platanos-verde-sal-marina-monterojo-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8904512.jpg"},{"sku":"89021163","name":"Platanitos Lima Limón - Monterojo x 30 g","brand":"Monterojo","cat":"Platanitos","price":3000,"slug":"platanitos-lima-limon-monterojo-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89021163.jpg"},{"sku":"89025291","name":"Plátano Sal Marina - Monterojo x 6 uds","brand":"Monterojo","cat":"Platanitos","price":16800,"slug":"platano-sal-marina-monterojo-x-6-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89025291.jpg"},{"sku":"79181353","name":"Tostones Original - Rustle X 120 g","brand":"Rustle","cat":"Platanitos","price":9400,"slug":"tostones-original-rustle-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/654a447e-57e0-4ec4-a2b3-1dc51e043a4b.png"},{"sku":"79181354","name":"Tostones de Ajo y Cebolla - Rustle X 120 g","brand":"Rustle","cat":"Platanitos","price":9400,"slug":"tostones-de-ajo-y-cebolla-rustle-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/30de4c39-fb76-4bf0-9a2c-f45d54bdb5ce.jpg"}]],
+  ["Rosquitas",[{"sku":"79971729","name":"Rosquitas de Yuca y Chía - fithub x 20 g","brand":"Fithub","cat":"Rosquitas","price":2500,"slug":"rosquitas-de-yuca-y-chia-fithub-x-20-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/R1.png"},{"sku":"79071296","name":"Rosquitas de Yuca y Chía - fithub x 6 uds","brand":"Fithub","cat":"Rosquitas","price":9000,"slug":"rosquitas-de-yuca-y-chia-fithub-x-6-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/42.png"},{"sku":"89022726","name":"Rosquitas Picante - Quinoa Club x 1 uds","brand":"Quinoa Club","cat":"Rosquitas","price":4300,"slug":"rosquitas-picante-quinoa-club-x-1-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Rosquitas_Picante_x_1_ud.png"}]],
+  ["Snacks",[{"sku":"79079198","name":"Chips de Plátano Maduro - Good Chips x 15 g","brand":"Good Chips","cat":"Snacks","price":5500,"slug":"chips-de-platano-maduro-good-chips-x-15-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079198.jpg"},{"sku":"79036696","name":"Garbanzos con Limón - Seeds x 150 g","brand":"Seeds","cat":"Snacks","price":16500,"slug":"garbanzos-con-limon-seeds-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79036696.jpg"},{"sku":"89100167","name":"Bizcocho de Mantequilla - Madeleine St Michel x 25 G","brand":"Madeleine St Michel","cat":"Snacks","price":4500,"slug":"bizcocho-de-mantequilla-madeleine-st-michel-x-25-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e74ba936-98bf-4262-bb09-22e8eb9c1957.jpg"},{"sku":"79180842","name":"Piña Horneada - Good Chips X 15 g","brand":"Good Chips","cat":"Snacks","price":6200,"slug":"pina-horneada-good-chips-x-15-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d82131dc-5093-46fc-b097-cb42ae8098bc.jpg"},{"sku":"79070124","name":"Arándanos - Manitoba x 150 g","brand":"Manitoba","cat":"Snacks","price":14990,"slug":"arandanos-manitoba-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070124.jpg"},{"sku":"89100164","name":"Bizcocho de Mantequilla - Madeleine St Michel x 250 g","brand":"Madeleine St Michel","cat":"Snacks","price":34650,"slug":"bizcocho-de-mantequilla-madeleine-st-michel-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/548a04fe-c6cc-48be-b3a1-993a6148a2d4.jpg"},{"sku":"89100165","name":"Bizcocho de Mantequilla - Madeleine St Michel x 175 g","brand":"Madeleine St Michel","cat":"Snacks","price":25150,"slug":"bizcocho-de-mantequilla-madeleine-st-michel-x-175-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/13a203bc-af81-43c8-b9e8-c390158b2ad8.jpg"},{"sku":"79070123","name":"Arándanos - Manitoba x 35 g","brand":"Manitoba","cat":"Snacks","price":3390,"slug":"arandanos-manitoba-x-35-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070123.jpg"},{"sku":"89100166","name":"Bizcocho de Mantequilla Chips Chocolate - Madeleine St Michel x 175 g","brand":"Madeleine St Michel","cat":"Snacks","price":26100,"slug":"bizcocho-de-mantequilla-chips-chocolate-madeleine-st-michel-x-175-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/135bb9fc-b434-4f1c-a1aa-c8c53d32914d.jpg"}]],
+  ["Yucas & Nachos",[{"sku":"79180885","name":"Nachos - Nutivos X 500 g","brand":"Nutivos","cat":"Yucas & Nachos","price":20000,"slug":"nachos-nutivos-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b13c95e2-57cb-46c1-9e55-eda7190a7675.jpg"},{"sku":"79182047","name":"Nachos de Almendra Chipotle - Palamano x 90g","brand":"Palamano","cat":"Yucas & Nachos","price":22900,"slug":"nachos-de-almendra-chipotle-palamano-x-90g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/54f1585a-db05-41a9-9086-f45ad330ad07.jpg"}]],
+  ["Esparcibles Refrigerados",[{"sku":"79075336","name":"Queso Crema de Almendras Krimy Original - Krima x 170 g","brand":"Krima","cat":"Esparcibles Refrigerados","price":27800,"slug":"queso-crema-de-almendras-krimy-original-krima-x-170-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7907533.jpg"},{"sku":"79076081","name":"Queso Crema Almendra Everything Bagel - Krima x 170 g","brand":"Krima","cat":"Esparcibles Refrigerados","price":27800,"slug":"queso-crema-almendra-everything-bagel-krima-x-170-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/790760848.jpg"},{"sku":"79076098","name":"Queso Crema Almendra Italiano - Krima x 170 g","brand":"Krima","cat":"Esparcibles Refrigerados","price":27800,"slug":"queso-crema-almendra-italiano-krima-x-170-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076099.jpg"},{"sku":"89030592","name":"Mantequilla con Sal Himalaya - San Martín x 480 g","brand":"San Martín","cat":"Esparcibles Refrigerados","price":31500,"slug":"mantequilla-con-sal-himalaya-san-martin-x-480-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89030592_mwsRjcC.jpg"}]],
+  ["Quesos Regulares",[{"sku":"79075428","name":"Queso Feta - Centurion x 250 g","brand":"Centurión","cat":"Quesos Regulares","price":24500,"slug":"queso-feta-centurion-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/078.jpg"},{"sku":"79182591","name":"Queso de Bufalita - Gourmet a Porter x 40 g","brand":"Gourmet a Porter","cat":"Quesos Regulares","price":3700,"slug":"queso-de-bufalita-gourmet-a-porter-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/dd1cfb5c-e765-49a9-aed7-12de2ef3175c.jpg"},{"sku":"79060363","name":"Gouda Ahumado Tajado - Centurión x 150 g","brand":"Centurión","cat":"Quesos Regulares","price":12200,"slug":"gouda-ahumado-tajado-centurion-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b8f1287c-c9f3-4110-ab26-d9411da71d25.png"},{"sku":"79060387","name":"Queso Colby Jack Tajado - Centurión x 150 g","brand":"Centurión","cat":"Quesos Regulares","price":12200,"slug":"queso-colby-jack-tajado-centurion-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b55f4985-1501-4522-bd96-0da2aa8651de.jpg"},{"sku":"79182597","name":"Queso Provolone Porcionado Ahumado - Gourmet a Porter x 300g","brand":"Gourmet a Porter","cat":"Quesos Regulares","price":42000,"slug":"queso-provolone-porcionado-ahumado-gourmet-a-porter-x-300g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/260932b2-b29e-41ee-bf13-45351cd0f0e7.jpg"},{"sku":"79182134","name":"Queso Apenino Rallado - Maduratto x 100 g","brand":"Maduratto","cat":"Quesos Regulares","price":13500,"slug":"queso-apenino-rallado-maduratto-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5a061ed5-7f2c-4d0f-82c1-f56179ab2dbf.jpg"},{"sku":"79182135","name":"Queso Tenjano Cuña - Maduratto x 200 g","brand":"Maduratto","cat":"Quesos Regulares","price":19500,"slug":"queso-tenjano-cuna-maduratto-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6afaa68d-25c3-458b-8272-6f5f97d4e2b2.jpg"},{"sku":"79182136","name":"Queso Baby Montecristo Tradicional - Maduratto x 250 g","brand":"Maduratto","cat":"Quesos Regulares","price":23500,"slug":"queso-baby-montecristo-tradicional-maduratto-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f72c9f96-41bc-4d0e-bbb7-c99f8942583f.jpg"}]],
+  ["Quesos Veganos",[{"sku":"79073035","name":"Queso Lonchas Mozzarella - Violife x 200 g","brand":"Violife","cat":"Quesos Veganos","price":18600,"slug":"queso-lonchas-mozzarella-violife-x-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073035.jpg"},{"sku":"89027073","name":"Queso Tajado sabor Cheddar Maduro - Violife 200 g","brand":"Violife","cat":"Quesos Veganos","price":19400,"slug":"queso-tajado-sabor-cheddar-maduro-violife-200-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89027073.jpg"}]],
+  ["Yogures Regulares",[{"sku":"89022474","name":"Yogurt Griego con Stevia - fithub x 500 g","brand":"Fithub","cat":"Yogures Regulares","price":22650,"slug":"yogurt-griego-con-stevia-fithub-x-500-g-2","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89022474.jpg"},{"sku":"89020029","name":"Yogurt Griego con Stevia - fithub x 150 g","brand":"Fithub","cat":"Yogures Regulares","price":8950,"slug":"yogurt-griego-con-stevia-fithub-x-150-g-2","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89020029.jpg"},{"sku":"89029633","name":"Yogurt Griego sin Stevia - fithub x 1 L","brand":"Fithub","cat":"Yogures Regulares","price":42000,"slug":"yogurt-griego-sin-stevia-fithub-x-1-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89029633.jpg"},{"sku":"89016640","name":"Yogurt Griego sin Stevia - fithub x 150 g","brand":"Fithub","cat":"Yogures Regulares","price":8950,"slug":"yogurt-griego-sin-stevia-fithub-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89016640.jpg"},{"sku":"89022498","name":"Yogurt Griego sin Stevia - fithub x 500 g","brand":"Fithub","cat":"Yogures Regulares","price":22650,"slug":"yogurt-griego-sin-stevia-fithub-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89022498_vUUVkuD.jpg"},{"sku":"89028995","name":"Yogurt Griego con Stevia - fithub x 1 L","brand":"Fithub","cat":"Yogures Regulares","price":42000,"slug":"yogurt-griego-con-stevia-fithub-x-1-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89028995.jpg"},{"sku":"89029893","name":"Yogurt Natural - Sketos x 900 g","brand":"Sketos","cat":"Yogures Regulares","price":42800,"slug":"yogurt-natural-sketos-x-900-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89029894.jpg"},{"sku":"79182779","name":"Yogurt de Coco Natural - Mils x 450 g","brand":"Mils","cat":"Yogures Regulares","price":27650,"slug":"yogurt-de-coco-natural-mils-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0aecf167-1535-458f-a7e7-206384dcd338.jpg"}]],
+  ["Yogurt Vegano",[{"sku":"79057172","name":"Yococo Piña Colada - Bodai x 140 g","brand":"Bodai","cat":"Yogurt Vegano","price":9200,"slug":"yococo-pina-colada-bodai-x-140-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79057172.jpg"}]],
+  ["Arepas Congeladas",[{"sku":"89025369","name":"Arepas de Cayeye - fithub x 5 uds","brand":"Fithub","cat":"Arepas Congeladas","price":23000,"slug":"arepas-de-cayeye-fithub-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/cayeyeyeyet.png"},{"sku":"89030325","name":"Arepas de Choclo con Queso - fithub x 5 uds","brand":"Fithub","cat":"Arepas Congeladas","price":24500,"slug":"arepas-de-choclo-con-queso-fithub-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89030325.jpg"},{"sku":"89030448","name":"Arepas de Maíz Blanco con Queso - fithub x 5 uds","brand":"Fithub","cat":"Arepas Congeladas","price":19600,"slug":"arepas-de-maiz-blanco-con-queso-fithub-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89030448.jpg"},{"sku":"89025352","name":"Arepas Maduritas - fithub x 5 uds","brand":"Fithub","cat":"Arepas Congeladas","price":23000,"slug":"arepas-maduritas-fithub-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/maduritasndfmc.png"},{"sku":"89030455","name":"Arepas de Yuca con Queso - fithub x 5 uds","brand":"Fithub","cat":"Arepas Congeladas","price":20800,"slug":"arepas-de-yuca-con-queso-fithub-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89030455.jpg"},{"sku":"79071673","name":"Arepa de Maíz Blanco con Chía y Queso - ArepFit x 5 uds","brand":"Arepfit","cat":"Arepas Congeladas","price":22200,"slug":"arepa-de-maiz-blanco-con-chia-y-queso-arepfit-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79071673.jpg"},{"sku":"89016299","name":"Arepas de Maíz - ArepFit x 5 uds","brand":"Arepfit","cat":"Arepas Congeladas","price":21500,"slug":"arepas-de-maiz-arepfit-x-5-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Arepa_de_Maíz_-_5_uds.png"},{"sku":"79075909","name":"Arepitas de Plátano Maduro - Top Spun x 150 g","brand":"Top Spun","cat":"Arepas Congeladas","price":20600,"slug":"arepitas-de-platano-maduro-top-spun-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/10000.jpg"}]],
+  ["Carnes de Origen Vegetal",[{"sku":"79076470","name":"Hamburguesas de Quinua y Lenteja - Nuaqui x 472 g","brand":"Nuaqui","cat":"Carnes de Origen Vegetal","price":23000,"slug":"hamburguesas-de-quinua-y-lenteja-nuaqui-x-472-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076470.jpg"}]],
+  ["Comida Preparada",[{"sku":"89025239","name":"Deditos de Yuca con Queso - fithub x 8 uds","brand":"Fithub","cat":"Comida Preparada","price":24000,"slug":"deditos-de-yuca-con-queso-fithub-x-8-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/deditos_yuca_1_.png"},{"sku":"79077194","name":"Joy Burrito de Pollo al Pastor - JoyFuds x 150 g","brand":"JoyFuds","cat":"Comida Preparada","price":13000,"slug":"joy-burrito-de-pollo-al-pastor-joyfuds-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077194.jpg"},{"sku":"79180622","name":"Mini Albondigas Kids - Be Food X 250 g","brand":"Be Food","cat":"Comida Preparada","price":36500,"slug":"mini-albondigas-kids-be-food-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c5e92dee-dbd8-4d07-b0df-421cfccbc3ad.jpg"},{"sku":"79180624","name":"Pollo Con Champinones Al Vino - Be Food X 250 g","brand":"Be Food","cat":"Comida Preparada","price":36500,"slug":"pollo-con-champinones-al-vino-be-food-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89689d1e-440d-47de-9c61-789d77e4b0dc.jpg"},{"sku":"79180626","name":"Crema De Espinaca - Be Food X 250 g","brand":"Be Food","cat":"Comida Preparada","price":22600,"slug":"crema-de-espinaca-be-food-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/dc268f91-9cb8-402c-9bba-ef4cf4a040d6.jpg"}]],
+  ["Helados y Paletas",[{"sku":"89017661","name":"Bites de Almendra - fithub x 12 uds","brand":"Fithub","cat":"Helados y Paletas","price":24500,"slug":"bites-de-almendra-fithub-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89017661.jpg"},{"sku":"89026656","name":"Bites de Vainilla - fithub x 12 uds","brand":"Fithub","cat":"Helados y Paletas","price":20800,"slug":"bites-de-vainilla-fithub-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89026656.jpg"},{"sku":"79181082","name":"Helado Choco Avellanas - OLÜ X 375 g","brand":"OLÜ","cat":"Helados y Paletas","price":34800,"slug":"helado-choco-avellanas-olu-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ce272141-7f6d-4418-b669-5c00a8cc5f35.png"},{"sku":"79071486","name":"Helado de Coco - Bodai x 80 g","brand":"Bodai","cat":"Helados y Paletas","price":9900,"slug":"helado-de-coco-bodai-x-80-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79071486.jpg"},{"sku":"79181085","name":"Helado Pistacho - OLÜ X 375 g","brand":"OLÜ","cat":"Helados y Paletas","price":40900,"slug":"helado-pistacho-olu-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5a439dce-f5b0-4c08-bf3b-c5e39b51482f.png"},{"sku":"79181999","name":"Paleta con Proteína sabor a Maracuyá - Wodcream x 90g","brand":"Wodcream","cat":"Helados y Paletas","price":12000,"slug":"paleta-con-proteina-sabor-a-maracuya-wodcream-x-90g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/243aec47-ee08-45da-85f7-ea7cf3498189.jpg"},{"sku":"89100147","name":"Frambuesas Bañadas en Chocolate Sin Azúcar - Franuí x 150 g","brand":"Franuí","cat":"Helados y Paletas","price":33900,"slug":"frambuesas-banadas-en-chocolate-sin-azucar-franui-x-150-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d0801a71-f8f9-42a5-b570-eb033eb326c3.jpg"},{"sku":"79181078","name":"Helado Caramelo - OLÜ X 90 g","brand":"OLÜ","cat":"Helados y Paletas","price":11900,"slug":"helado-caramelo-olu-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1bc8bd50-9fea-4058-b4d5-686b3e55208b.png"},{"sku":"79181079","name":"Helado Pistacho - OLÜ X 90 g","brand":"OLÜ","cat":"Helados y Paletas","price":14000,"slug":"helado-pistacho-olu-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7927b2e0-3359-4187-bb5e-8047adb27203.png"},{"sku":"79181075","name":"Helado Vainilla Chips - OLÜ X 90 g","brand":"OLÜ","cat":"Helados y Paletas","price":11900,"slug":"helado-vainilla-chips-olu-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1a413fee-1894-4e5f-afcd-41289fa9abd4.png"},{"sku":"79181076","name":"Helado Choco Avellanas - OLÜ X 90 g","brand":"OLÜ","cat":"Helados y Paletas","price":11900,"slug":"helado-choco-avellanas-olu-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d512e53c-290a-406c-82aa-6b66bee1749b.png"},{"sku":"79181077","name":"Helado Pie De Limón - OLÜ X 90 g","brand":"OLÜ","cat":"Helados y Paletas","price":11900,"slug":"helado-pie-de-limon-olu-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/aaa8d6b6-2fee-4df2-bec7-a169bb951c46.png"},{"sku":"79181081","name":"Helado Vainilla Chips - OLÜ X 375 g","brand":"OLÜ","cat":"Helados y Paletas","price":34800,"slug":"helado-vainilla-chips-olu-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c2a38d10-a098-4e6f-a18b-f39f36c92c28.png"},{"sku":"79181086","name":"Helado Frutos Rojos - OLÜ X 375 g","brand":"OLÜ","cat":"Helados y Paletas","price":34800,"slug":"helado-frutos-rojos-olu-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0856063c-5d2a-4a08-a3ce-d76f5f6bea4d.png"},{"sku":"79181080","name":"Helado Frutos Rojos - OLÜ X 90 g","brand":"OLÜ","cat":"Helados y Paletas","price":11900,"slug":"helado-frutos-rojos-olu-x-90-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7672b2e7-064e-4852-a377-a81d076c9f40.png"},{"sku":"79181084","name":"Helado Pie De Limón - OLÜ X 375 g","brand":"OLÜ","cat":"Helados y Paletas","price":34800,"slug":"helado-pie-de-limon-olu-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2a0f04a1-9c48-4dd1-bd63-9778ca7566b6.png"},{"sku":"79181083","name":"Helado Caramelo - OLÜ X 375 g","brand":"OLÜ","cat":"Helados y Paletas","price":34800,"slug":"helado-caramelo-olu-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/dfddc952-09fb-4bb9-bc0f-cedd5bad87f8.png"}]],
+  ["Pasta & Pizza",[{"sku":"79070379","name":"Ravioli Espinaca y Queso - IL Castello x 450 g","brand":"IL Castello","cat":"Pasta & Pizza","price":35000,"slug":"ravioli-espinaca-y-queso-il-castello-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070379.PNG"},{"sku":"79070362","name":"Ravioli Carne - IL Castello x 450 g","brand":"IL Castello","cat":"Pasta & Pizza","price":34000,"slug":"ravioli-carne-il-castello-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070362.PNG"}]],
+  ["Pulpas de Frutas",[{"sku":"79180944","name":"Smoothies Funcionales Happy Mood - Nüsh Mindfoodness X 375 g","brand":"Nüsh Mindfoodness","cat":"Pulpas de Frutas","price":42500,"slug":"smoothies-funcionales-happy-mood-nush-mindfoodness-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/98782a55-70bd-4b51-8038-3b39692a02e7.jpg"},{"sku":"79076425","name":"Pulpa de Jugo Rojo con Colágeno - Fit Juice x 500 g","brand":"Fit Juice","cat":"Pulpas de Frutas","price":36500,"slug":"pulpa-de-jugo-rojo-con-colageno-fit-juice-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076426.jpg"},{"sku":"79180946","name":"Smoothies Funcionales Better Than Botox - Nüsh Mindfoodness X 375 g","brand":"Nüsh Mindfoodness","cat":"Pulpas de Frutas","price":42500,"slug":"smoothies-funcionales-better-than-botox-nush-mindfoodness-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a88f1fa2-a613-4b29-a1b5-b70de8557532.jpg"},{"sku":"79180947","name":"Smoothies Funcionales Antiinflamatorio - Nüsh Mindfoodness X 375 g","brand":"Nüsh Mindfoodness","cat":"Pulpas de Frutas","price":42500,"slug":"smoothies-funcionales-antiinflamatorio-nush-mindfoodness-x-375-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7e89dba9-aa46-4ffb-9db5-6f83fefa3e51.jpg"},{"sku":"79076012","name":"Mezcla de Vegetales y Frutas sabor Rojo - Marimilafit x 700 g","brand":"Marimilafit","cat":"Pulpas de Frutas","price":25000,"slug":"mezcla-de-vegetales-y-frutas-sabor-rojo-marimilafit-x-700-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/26.png"}]],
+  ["Carnes Blancas",[{"sku":"79181740","name":"Filete De Pavo - Origen Natural X 1000 g","brand":"Origen Natural","cat":"Carnes Blancas","price":110000,"slug":"filete-de-pavo-origen-natural-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/440f442f-6f9f-4c94-992e-1637f61f4871.jpg"},{"sku":"89100131","name":"Filete de Pechuga Finas Hierbas - La Banquiva x 500 g","brand":"La Banquiva","cat":"Carnes Blancas","price":33250,"slug":"filete-de-pechuga-finas-hierbas-la-banquiva-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/46edabc3-1902-45f6-a0f2-19e3251a825d.jpg"},{"sku":"89100132","name":"Filete de Contramuslo Natural - La Banquiva x 1000 g","brand":"La Banquiva","cat":"Carnes Blancas","price":45350,"slug":"filete-de-contramuslo-natural-la-banquiva-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/91996ad9-2d00-49d1-83ed-f9a45afd780a.jpg"}]],
+  ["Carnes Rojas",[{"sku":"79182483","name":"Mix 3 Carnes (Coppa, Lomo, Salami) - Tradizione x 120 g","brand":"Tradizione","cat":"Carnes Rojas","price":28074,"slug":"mix-3-carnes-coppa-lomo-salami-tradizione-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/48aadee0-327e-4379-a7ba-bcc17ab76d16.jpg"},{"sku":"79073899","name":"Carne de Res Hamburguesa - Pesquera del Mar x 500 g","brand":"Pesquera del Mar","cat":"Carnes Rojas","price":37000,"slug":"carne-de-res-hamburguesa-pesquera-del-mar-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073899.jpg"},{"sku":"79182292","name":"Cabano - Catalán x 68g","brand":"Catalan","cat":"Carnes Rojas","price":5800,"slug":"cabano-catalan-x-68g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/82296a5a-ba51-4f81-8345-03fef96fd3e7.jpg"},{"sku":"79182481","name":"Salami Madurado Cortado - Tradizione x 100 g","brand":"Tradizione","cat":"Carnes Rojas","price":19990,"slug":"salami-madurado-cortado-tradizione-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8412561a-c500-4855-9777-b71210cb64c6.jpg"},{"sku":"79182562","name":"Pernil Porcion Plato - La Rambla x 460 g","brand":"La Rambla","cat":"Carnes Rojas","price":56600,"slug":"pernil-porcion-plato-la-rambla-x-460-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/78453b9d-d9d6-4c41-9cf2-0593a374b586.jpg"},{"sku":"79182935","name":"Churrasco de Pavo Ahumado - Pavos del Campo x 750 g","brand":"Pavos del Campo","cat":"Carnes Rojas","price":35900,"slug":"churrasco-de-pavo-ahumado-pavos-del-campo-x-750-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/238b2e42-4ebc-4233-9918-0da641d5227d.jpg"},{"sku":"89100127","name":"Coulotte - Loma x 450 g","brand":"Loma","cat":"Carnes Rojas","price":27900,"slug":"coulotte-loma-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/614217f5-a3ee-4351-8dd2-7d8795fd8374.jpg"},{"sku":"89100128","name":"Carne para desmechar - Loma x 500 g","brand":"Loma","cat":"Carnes Rojas","price":21000,"slug":"carne-para-desmechar-loma-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d7dd42fc-f0c7-434f-bba6-5542858558b0.jpg"},{"sku":"89100126","name":"Ribeye con hueso - Loma x 620 g","brand":"Loma","cat":"Carnes Rojas","price":48000,"slug":"ribeye-con-hueso-loma-x-620-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1b08016d-299b-4187-9284-f94f7d64739e.jpg"}]],
+  ["Embutidos",[{"sku":"79070316","name":"Jamón York - Catalán x210g","brand":"Catalan","cat":"Embutidos","price":22500,"slug":"jamon-york-catalan-x210g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/46801ec6-7be7-4762-949d-0eb1dea524a0.jpg"},{"sku":"79070319","name":"Salchicha Desayuno - Catalan x240 g","brand":"Catalan","cat":"Embutidos","price":13990,"slug":"salchicha-desayuno-catalan-x240-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070319.jpg"},{"sku":"79070320","name":"Tocineta Catalan x 250 g","brand":"Catalan","cat":"Embutidos","price":29990,"slug":"tocineta-catalan-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/Tocineta.jpg"}]],
+  ["Pescado & Mariscos",[{"sku":"79070232","name":"Salmón Lomito en Bolsa -Pesquera del Mar  x 480 g","brand":"Pesquera del Mar","cat":"Pescado & Mariscos","price":14200,"slug":"salmon-lomito-en-bolsa-pesquera-del-mar-x-480-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070232.png"},{"sku":"79070225","name":"Filete de Salmón - Pesquera del Mar x 450 g","brand":"Pesquera del Mar","cat":"Pescado & Mariscos","price":46000,"slug":"filete-de-salmon-pesquera-del-mar-x-450-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79070225.jpg"},{"sku":"79075299","name":"Salmón - Origen Natural x 250 g","brand":"Origen Natural","cat":"Pescado & Mariscos","price":38000,"slug":"salmon-origen-natural-x-250-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6368dda0-2325-4d01-a29b-002f8269944a.jpg"},{"sku":"79181736","name":"Anillos de Calamar - Origen Natural X 350 g","brand":"Origen Natural","cat":"Pescado & Mariscos","price":36500,"slug":"anillos-de-calamar-origen-natural-x-350-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/155cc9cb-4db0-4cc0-8ec6-487fd3405ca8.jpg"},{"sku":"89100133","name":"Filete de Salmón Chileno - La Banquiva x 500 g","brand":"La Banquiva","cat":"Pescado & Mariscos","price":61350,"slug":"filete-de-salmon-chileno-la-banquiva-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d0218c1c-5fc8-435d-9113-f84be3eed2c7.jpg"}]],
+  ["Amino Ácidos",[{"sku":"79180389","name":"Aminoácido + Glutamina - Pwrlab X 384g","brand":"Powerlab","cat":"Amino Ácidos","price":165000,"slug":"aminoacido-glutamina-pwrlab-x-384g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/009.png"},{"sku":"89026342","name":"Army BCAA Citrus Punch - Proscience x 500 g","brand":"Proscience","cat":"Amino Ácidos","price":115000,"slug":"army-bcaa-citrus-punch-proscience-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89026342.jpg"},{"sku":"79027304","name":"Army BCAA Green Mix - Proscience x 1,12 L","brand":"Proscience","cat":"Amino Ácidos","price":115000,"slug":"army-bcaa-green-mix-proscience-x-112-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/army_green_mix_.png"},{"sku":"79076029","name":"Beta-Alanine 3200 MG - Healthy Sports x 120 cap","brand":"Healthy Sports","cat":"Amino Ácidos","price":85000,"slug":"beta-alanine-3200-mg-healthy-sports-x-120-cap","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076030.jpg"}]],
+  ["Barras de Proteínas",[{"sku":"79180702","name":"Barra De Proteína Crispy Brownie Chocolate  - Integralmedica X 45 g","brand":"Integralmedica","cat":"Barras de Proteínas","price":10200,"slug":"barra-de-proteina-crispy-brownie-chocolate-integralmedica-x-45-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a8224bcf-6bbf-47b0-a698-50bfd4cd1221.jpg"},{"sku":"89025734","name":"Original Triple Chocolate - Power Crunch x 40 g","brand":"Power Crunch","cat":"Barras de Proteínas","price":16200,"slug":"original-triple-chocolate-power-crunch-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89025735.jpg"},{"sku":"89020128","name":"Barra French Vanilla Créme - Power Crunch x 40 g","brand":"Power Crunch","cat":"Barras de Proteínas","price":16200,"slug":"barra-french-vanilla-creme-power-crunch-x-40-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89020128.jpg"},{"sku":"89018446","name":"Barra de Proteína Chocolate Chip Cookie Dough - One x 60 g","brand":"One Bar","cat":"Barras de Proteínas","price":18900,"slug":"barra-de-proteina-chocolate-chip-cookie-dough-one-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89018447.jpg"},{"sku":"89019764","name":"Barra de Proteína Chocolate  - The Protein Choice x 60 g","brand":"The Protein Choice","cat":"Barras de Proteínas","price":11900,"slug":"barra-de-proteina-chocolate-the-protein-choice-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89019764.jpg"},{"sku":"79182763","name":"Alfajores Wich Peanut - Mrs. Taste x 10 g","brand":"Mrs. Taste","cat":"Barras de Proteínas","price":21876,"slug":"alfajores-wich-peanut-mrs-taste-x-10-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ed0e8cd8-b021-41fa-88ad-6c9bafb2d57b.jpg"},{"sku":"79060141","name":"Barra de Proteína Smores - One x 60 g","brand":"One Bar","cat":"Barras de Proteínas","price":18900,"slug":"barra-de-proteina-smores-one-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79060142.jpg"},{"sku":"79182678","name":"Iron Bar Chocolate - Gentech x 46 g","brand":"Gentech","cat":"Barras de Proteínas","price":13790,"slug":"iron-bar-chocolate-gentech-x-46-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c3ad15dd-5ac5-41e0-aa0a-8436c6ce27b2.jpg"},{"sku":"79182680","name":"Iron Bar Frutilla - Gentech x 46 g","brand":"Gentech","cat":"Barras de Proteínas","price":13790,"slug":"iron-bar-frutilla-gentech-x-46-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2852be8f-d43f-48a0-bd89-53af18471993.jpg"},{"sku":"79182679","name":"Iron Bar Coco - Gentech x 46 g","brand":"Gentech","cat":"Barras de Proteínas","price":13790,"slug":"iron-bar-coco-gentech-x-46-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/27a907d1-74b5-4236-afa7-fefc457cd2f9.jpg"},{"sku":"79182702","name":"Barra Chewy Chocolate Chip - Pure Protein x 50 g","brand":"Pure Protein","cat":"Barras de Proteínas","price":16400,"slug":"barra-chewy-chocolate-chip-pure-protein-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/3018c6b9-2b87-492e-802d-fbf4e88f7589.jpg"},{"sku":"79180661","name":"Protein Ball Cookies and Cream Crunchy - Athletical X 50 g","brand":"Athletical","cat":"Barras de Proteínas","price":12590,"slug":"protein-ball-cookies-and-cream-crunchy-athletical-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c01a28b9-b84c-49d4-a14e-93b0e07fe5e9.jpg"},{"sku":"79075503","name":"Barra de Frutas con Proteína Arveja, Banano y Cacao - Zúbu x 60 g","brand":"Zúbu","cat":"Barras de Proteínas","price":10000,"slug":"barra-de-frutas-con-proteina-arveja-banano-y-cacao-zubu-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7907550.jpg"},{"sku":"79182705","name":"Barra de Proteinas Birthday Cake - Pure Protein x 50 g","brand":"Pure Protein","cat":"Barras de Proteínas","price":16400,"slug":"barra-de-proteinas-birthday-cake-pure-protein-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a7db9d10-812f-4592-9313-5fe81e15c0b8.jpg"},{"sku":"79182766","name":"Spread Cookie And Cream - Mrs. Taste x 160 g","brand":"Mrs. Taste","cat":"Barras de Proteínas","price":49000,"slug":"spread-cookie-and-cream-mrs-taste-x-160-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/9f560834-bc1b-46ee-a62a-86405883a55a.jpg"},{"sku":"79182767","name":"Spread Choco Avellana - Mrs. Taste x 160 g","brand":"Mrs. Taste","cat":"Barras de Proteínas","price":49000,"slug":"spread-choco-avellana-mrs-taste-x-160-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8fa2479d-b96b-4a89-9387-4c71d8143e08.jpg"},{"sku":"89100197","name":"Barra de Proteína Hershey\'s - One Bar x 60 g","brand":"One Bar","cat":"Barras de Proteínas","price":19500,"slug":"barra-de-proteina-hersheys-one-bar-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/262b5572-7861-4a24-a76d-3678802b425b.jpg"},{"sku":"79182677","name":"Iron Bar Banana - Gentech x 46 g","brand":"Gentech","cat":"Barras de Proteínas","price":13790,"slug":"iron-bar-banana-gentech-x-46-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d836daf8-648b-43ec-955d-574a54470f30.jpg"},{"sku":"79182710","name":"Barra Protein Chocolate Peanut Caramelo - Pure Protein x 50 g","brand":"Pure Protein","cat":"Barras de Proteínas","price":16400,"slug":"barra-protein-chocolate-peanut-caramelo-pure-protein-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/1e74a3f7-8ac6-4e77-99db-d067bdeeee04.jpg"},{"sku":"79182682","name":"Iron Bar Menta Granizada - Gentech x 46 g","brand":"Gentech","cat":"Barras de Proteínas","price":13790,"slug":"iron-bar-menta-granizada-gentech-x-46-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ac52f560-e18b-4d05-8d26-f7a0501f94d3.jpg"},{"sku":"79182704","name":"Barra de Chocolate Salted Caramelo - Pure Protein x 50 g","brand":"Pure Protein","cat":"Barras de Proteínas","price":16400,"slug":"barra-de-chocolate-salted-caramelo-pure-protein-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/3dc61b3b-b628-4d66-b15a-7f210a9f511f.jpg"},{"sku":"79182703","name":"Barra Chocolate Deluxe - Pure Protein x 50 g","brand":"Pure Protein","cat":"Barras de Proteínas","price":16400,"slug":"barra-chocolate-deluxe-pure-protein-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a4c47093-10db-450e-8f71-cee1b9ddad41.jpg"},{"sku":"79182769","name":"Barras de Proteina Vainilla - Protein Finger x 14,2 g","brand":"Protein Finger","cat":"Barras de Proteínas","price":15000,"slug":"barras-de-proteina-vainilla-protein-finger-x-142-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/3b7515c8-d29d-4215-8353-15040d26a296.jpg"},{"sku":"79182768","name":"Barras de Proteina Chocolate - Protein Finger x 14,2 g","brand":"Protein Finger","cat":"Barras de Proteínas","price":15000,"slug":"barras-de-proteina-chocolate-protein-finger-x-142-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/53378278-5a54-4a49-b9b0-f4df62ca65fc.jpg"},{"sku":"79073080","name":"Barra Maple Glazed Doughnut - One Bar x 60 g","brand":"One Bar","cat":"Barras de Proteínas","price":18900,"slug":"barra-maple-glazed-doughnut-one-bar-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073080.jpg"},{"sku":"79182681","name":"Iron Bar Limón - Gentech x 46 g","brand":"Gentech","cat":"Barras de Proteínas","price":13790,"slug":"iron-bar-limon-gentech-x-46-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/677aaef8-c0cf-48fd-ad9e-14deaf55435c.jpg"},{"sku":"79182975","name":"Protein Ball Cookie And Cream - Atlhetica Nutrition x 50 g","brand":"Atlhetica Nutrition","cat":"Barras de Proteínas","price":14000,"slug":"protein-ball-cookie-and-cream-atlhetica-nutrition-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/3a22a65c-1c13-4e8c-aab9-feb5714f47e3.jpg"}]],
+  ["Colágeno",[{"sku":"79079587","name":"Colágeno Marino Frutos del Bosque - Newhealth x 1000 g","brand":"Newhealth","cat":"Colágeno","price":123300,"slug":"colageno-marino-frutos-del-bosque-newhealth-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2f13c604-eec5-4f69-9a63-c8e3f5ae136e.jpg"},{"sku":"79182583","name":"Collagen Plus - Savvy x 75 g","brand":"Savvy","cat":"Colágeno","price":210800,"slug":"collagen-plus-savvy-x-75-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c2da75ef-fad5-4459-8a93-21a4555e722f.jpg"},{"sku":"79180600","name":"Colageno Hidrolizado - Sport Research X 454 g","brand":"Sport Research","cat":"Colágeno","price":199000,"slug":"colageno-hidrolizado-sport-research-x-454-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4f392e5f-1fd7-4e6f-bc2b-3c57296cebc8.jpg"},{"sku":"79182439","name":"Colageno - Zendietclub x 300 g","brand":"Zendietclub","cat":"Colágeno","price":154700,"slug":"colageno-zendietclub-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/fa9b1e35-8b82-4d3f-a456-fbbd80df336e.jpg"}]],
+  ["Creatinas",[{"sku":"89019511","name":"Recharge Lemon&Watermelon - Savvy x 120 g","brand":"Savvy","cat":"Creatinas","price":124900,"slug":"recharge-lemonwatermelon-savvy-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/011.jpeg"},{"sku":"79971749","name":"Recharge Refreshing Lemon - Savvy Doypack 20 uds x 6 g","brand":"Savvy","cat":"Creatinas","price":124900,"slug":"recharge-refreshing-lemon-savvy-doypack-20-uds-x-6-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79971749.jpg"},{"sku":"79180387","name":"Creatina - Pwrlab X 150g","brand":"Powerlab","cat":"Creatinas","price":129000,"slug":"creatina-pwrlab-x-150g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/007.png"},{"sku":"79180870","name":"Caja Crea Stack Frutos Rojos - Nutramerican x 25uds","brand":"Nutramerican","cat":"Creatinas","price":124990,"slug":"caja-crea-stack-frutos-rojos-nutramerican-x-25uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/6a3b640e-af38-48b6-8cb5-5b0b1bd0046d.jpg"},{"sku":"79026017","name":"Mega lite Rosada - Nutramerican  x 1.17 L","brand":"Nutramerican","cat":"Creatinas","price":79990,"slug":"mega-lite-rosada-nutramerican-x-117-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79026018.jpg"},{"sku":"79182438","name":"Creatina - Zendietclub x 300 g","brand":"Zendietclub","cat":"Creatinas","price":144288,"slug":"creatina-zendietclub-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/80d7708f-ede7-45b9-8643-8812a7d1d043.jpg"},{"sku":"79971756","name":"Perfect Blend - Macroblends x 2 Lb","brand":"Macroblends","cat":"Creatinas","price":175900,"slug":"perfect-blend-macroblends-x-2-lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79971756.jpg"}]],
+  ["Proteínas en Polvo",[{"sku":"79181379","name":"Bone Broth Chocolate Doypack - Savvy X 560 g","brand":"Savvy","cat":"Proteínas en Polvo","price":216900,"slug":"bone-broth-chocolate-doypack-savvy-x-560-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b6a55990-02b2-44aa-9601-511ecc50a2a5.jpg"},{"sku":"79073639","name":"ISO 100 Fresa - Dymatize x 1.3lb","brand":"Dymatize","cat":"Proteínas en Polvo","price":231900,"slug":"iso-100-fresa-dymatize-x-13lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073639.jpg"},{"sku":"79180683","name":"Iso 100 Dunkin Mocha Latte - Dymatize X 1,3 lb","brand":"Dymatize","cat":"Proteínas en Polvo","price":239900,"slug":"iso-100-dunkin-mocha-latte-dymatize-x-13-lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7c14a252-69d6-4bae-a1dc-a93fe5b64e05.jpg"},{"sku":"79072878","name":"Protein Cake Vainilla - Nutramerican  x 700 g","brand":"Nutramerican","cat":"Proteínas en Polvo","price":74990,"slug":"protein-cake-vainilla-nutramerican-x-700-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79072878_VnFSdp5.jpg"},{"sku":"79078528","name":"Bi Pro Clasic Vainilla - Nutramerican  x Caja","brand":"Nutramerican","cat":"Proteínas en Polvo","price":99990,"slug":"bi-pro-clasic-vainilla-nutramerican-x-caja","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79078528.jpg"},{"sku":"79182794","name":"Isolated Protein Frutos Rojos - Vass x 900 g","brand":"Vass","cat":"Proteínas en Polvo","price":190000,"slug":"isolated-protein-frutos-rojos-vass-x-900-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/d76388a6-19fd-4ff4-872e-a53b8c406ec9.jpg"},{"sku":"79075046","name":"Proteína TPC Vainilla - The Protein Choice x  2 lb","brand":"The Protein Choice","cat":"Proteínas en Polvo","price":162000,"slug":"proteina-tpc-vainilla-the-protein-choice-x-2-lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79075046_JeeoAJw.jpg"},{"sku":"79180385","name":"Proteina Isolate de Vainilla - Pwrlab X 952 g","brand":"Powerlab","cat":"Proteínas en Polvo","price":309000,"slug":"proteina-isolate-de-vainilla-pwrlab-x-952-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/005.jpg"},{"sku":"79971754","name":"Whey Blend Creamy Vainilla - Macroblends x 2 L","brand":"Macroblends","cat":"Proteínas en Polvo","price":178900,"slug":"whey-blend-creamy-vainilla-macroblends-x-2-l","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79971754.jpg"},{"sku":"79077132","name":"Heal Protein Chai Cream - FHN Nutrition x 690 g","brand":"Fhn Nutrition","cat":"Proteínas en Polvo","price":198000,"slug":"heal-protein-chai-cream-fhn-nutrition-x-690-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79077134.jpg"},{"sku":"79180824","name":"Whey 100% Cookies & Cream - Integralmedica X 2 lb","brand":"Integralmedica","cat":"Proteínas en Polvo","price":158500,"slug":"whey-100-cookies-cream-integralmedica-x-2-lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/fae82510-4d16-471f-afd1-47d1e908a098.jpg"},{"sku":"79182586","name":"Proteina Hoof Powder Fresas & Cream - Fhn Nutrition x 552 g","brand":"Fhn Nutrition","cat":"Proteínas en Polvo","price":198000,"slug":"proteina-hoof-powder-fresas-cream-fhn-nutrition-x-552-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b3e3a726-af07-4e07-9391-216b0cde697e.jpg"},{"sku":"79182683","name":"Whey Protein Vainilla - Gentech x 1000 g","brand":"Gentech","cat":"Proteínas en Polvo","price":253500,"slug":"whey-protein-vainilla-gentech-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a0c49472-07d6-4257-8a44-f0a9c29e067a.jpg"},{"sku":"79182686","name":"Whey Protein Chocolate - Gentech x 1000 g","brand":"Gentech","cat":"Proteínas en Polvo","price":253500,"slug":"whey-protein-chocolate-gentech-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4692f759-472e-4221-a103-230af0225ca0.jpg"},{"sku":"89100086","name":"ISO XP Vainilla - Applied Nutrition x 2 lb","brand":"Applied Nutrition","cat":"Proteínas en Polvo","price":298000,"slug":"iso-xp-vainilla-applied-nutrition-x-2-lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5228c119-0e62-4456-bb0a-7b92125e84fe.jpg"},{"sku":"79057585","name":"Barbarus - Healthy Sports x 910 g","brand":"Healthy Sports","cat":"Proteínas en Polvo","price":141600,"slug":"barbarus-healthy-sports-x-910-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79057585_z9xufb9.jpg"},{"sku":"79180386","name":"Proteina Isolate de Chocolate - Pwrlab X 1.050g","brand":"Powerlab","cat":"Proteínas en Polvo","price":309000,"slug":"proteina-isolate-de-chocolate-pwrlab-x-1050g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/006.jpg"},{"sku":"79182585","name":"Proteina Heal Fresas & Cream - Fhn Nutrition x 690 g","brand":"Fhn Nutrition","cat":"Proteínas en Polvo","price":203900,"slug":"proteina-heal-fresas-cream-fhn-nutrition-x-690-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/5e4b6d53-ea61-4bcd-8aa9-e14a6d9dcd54.jpg"},{"sku":"79182684","name":"Whey Protein Vainilla - Gentech x 500 g","brand":"Gentech","cat":"Proteínas en Polvo","price":127990,"slug":"whey-protein-vainilla-gentech-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e6b4ea80-aa33-49fe-af4f-729746c85cb4.jpg"},{"sku":"79182685","name":"Whey Protein Chocolate - Gentech x 500 g","brand":"Gentech","cat":"Proteínas en Polvo","price":127990,"slug":"whey-protein-chocolate-gentech-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/3751828f-7307-4087-8516-be1d06fea333.jpg"},{"sku":"89023952","name":"Legacy Fruit Punch - Proscience x 330 g","brand":"Proscience","cat":"Proteínas en Polvo","price":130000,"slug":"legacy-fruit-punch-proscience-x-330-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f8a79961-0c8e-4659-b9b0-e9319107b43b.jpg"},{"sku":"89100085","name":"ISO XP Chocolate Dessert - Applied Nutrition x 2 lb","brand":"Applied Nutrition","cat":"Proteínas en Polvo","price":298000,"slug":"iso-xp-chocolate-dessert-applied-nutrition-x-2-lb","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/8e4d4adb-d10f-4978-a180-f17afcf268f6.jpg"}]],
+  ["Snack Proteícos",[{"sku":"79050517","name":"Brownie de Caramelo con Proteína - Elemental Foods x 100 g","brand":"Elemental Foods","cat":"Snack Proteícos","price":13500,"slug":"brownie-de-caramelo-con-proteina-elemental-foods-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79050517_juLoJyi.jpg"},{"sku":"79050500","name":"Brownie de Chocolate con Proteína - Elemental Foods x 100 g","brand":"Elemental Foods","cat":"Snack Proteícos","price":13900,"slug":"brownie-de-chocolate-con-proteina-elemental-foods-x-100-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79050501.jpg"},{"sku":"79182716","name":"Galletas Con Chips de Chocolate - The Protein Choice x 42 g","brand":"The Protein Choice","cat":"Snack Proteícos","price":8900,"slug":"galletas-con-chips-de-chocolate-the-protein-choice-x-42-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/bff3ea51-e895-414a-894d-dd1158b5d663.jpg"},{"sku":"79181073","name":"Galleta Mantequilla de Mani - Quest X 59 g","brand":"Quest","cat":"Snack Proteícos","price":13900,"slug":"galleta-mantequilla-de-mani-quest-x-59-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/2622fe78-b802-4cfb-8b3b-77f485307b8e.jpg"},{"sku":"79181386","name":"Peanut Butter & Jelly - O-Lab X 50 g","brand":"O-Lab","cat":"Snack Proteícos","price":14500,"slug":"peanut-butter-jelly-o-lab-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/696a4bce-279a-460e-9b1b-6584d1f65892.jpg"}]],
+  ["Suplemento Dietario",[{"sku":"79182822","name":"Nutra Pops Proteína - Nutramerican x 500 g","brand":"Nutramerican","cat":"Suplemento Dietario","price":59900,"slug":"nutra-pops-proteina-nutramerican-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/247acc96-2a21-4b21-9768-e6e8f1aa3e91.jpg"},{"sku":"79182823","name":"Nutra Pops Proteína - Nutramerican x 12 Uds","brand":"Nutramerican","cat":"Suplemento Dietario","price":64900,"slug":"nutra-pops-proteina-nutramerican-x-12-uds","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ade59904-6e78-4320-87b9-078ed84bd4e9.jpg"},{"sku":"79181924","name":"Extracto de Reishi - Vital Setas x 60g","brand":"Vital Setas","cat":"Suplemento Dietario","price":94900,"slug":"extracto-de-reishi-vital-setas-x-60g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/fcc86404-7d79-4c63-bb66-4b7d88c2d553.jpg"},{"sku":"79181926","name":"Extracto de Melena de León -Vital Setas x 60g","brand":"Vital Setas","cat":"Suplemento Dietario","price":94900,"slug":"extracto-de-melena-de-leon-vital-setas-x-60g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/b4dfee1c-3996-4cb0-b6f2-578955b860bb.jpg"},{"sku":"79182916","name":"Recharge Pineapple Coconut - Savvy x 120 g","brand":"Savvy","cat":"Suplemento Dietario","price":124900,"slug":"recharge-pineapple-coconut-savvy-x-120-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7c8d985b-65e1-4b50-93b8-d38a9d54cdd4.jpg"},{"sku":"79182564","name":"Cúrcuma Frasco - Naturela x 60 Cápsulas","brand":"Naturela","cat":"Suplemento Dietario","price":47000,"slug":"curcuma-frasco-naturela-x-60-capsulas","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7f938244-aa36-41b0-8d4a-2a1aa17cba98.jpg"},{"sku":"79182796","name":"Citrato de Magnesio - Wunderwelt x 30 Tabletas","brand":"Wunderwelt","cat":"Suplemento Dietario","price":66800,"slug":"citrato-de-magnesio-wunderwelt-x-30-tabletas","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e662a34f-0725-47b7-ab02-53bafabe77e9.jpg"},{"sku":"79077569","name":"Citrato de Magnesio sabor Kiwi - Newhealth x 500 g","brand":"Newhealth","cat":"Suplemento Dietario","price":93500,"slug":"citrato-de-magnesio-sabor-kiwi-newhealth-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/4c0d1acc-9583-4331-95e8-d58bcb79b712.jpg"},{"sku":"79182261","name":"Gomitas Resveratrol - Mumu x 210 g","brand":"Mumu","cat":"Suplemento Dietario","price":109900,"slug":"gomitas-resveratrol-mumu-x-210-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/591316e1-5f56-4981-945e-fc7edbc52fa3.jpg"},{"sku":"79182262","name":"Gomitas Melena de Leon - Mumu x 240 g","brand":"Mumu","cat":"Suplemento Dietario","price":109900,"slug":"gomitas-melena-de-leon-mumu-x-240-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/07dddcec-a2a2-4da6-bdb3-6f6cb43daa98.jpg"},{"sku":"79182715","name":"Mezcla en polvo de Fibra Funcional - IKI Vegan x 405 g","brand":"Iki Vegan","cat":"Suplemento Dietario","price":88000,"slug":"mezcla-en-polvo-de-fibra-funcional-iki-vegan-x-405-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a759b400-dd07-4082-8373-b0704c3a708e.jpg"},{"sku":"79182687","name":"Wake Break Cappuccino - Gentech x 1130 g","brand":"Gentech","cat":"Suplemento Dietario","price":302940,"slug":"wake-break-cappuccino-gentech-x-1130-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a13b1225-2916-435b-8e35-e3090eef957a.jpg"},{"sku":"79182034","name":"Bone Up - Jarrow x 90Caps","brand":"El Jarrow","cat":"Suplemento Dietario","price":193900,"slug":"bone-up-jarrow-x-90caps","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f96ce43a-37bc-445c-96ed-db2c6c1cd10c.png"},{"sku":"79182035","name":"B-Formula - Jarrow x 100Caps","brand":"El Jarrow","cat":"Suplemento Dietario","price":229900,"slug":"b-formula-jarrow-x-100caps","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7dcc8f20-c5e7-4004-9a26-cffe3e072b6f.jpg"}]],
+  ["Suplemento Nutricional",[{"sku":"79182989","name":"Creatine Monohydrate Sin Sabor - Applied Nutrition x 50 g","brand":"Applied Nutrition","cat":"Suplemento Nutricional","price":120700,"slug":"creatine-monohydrate-sin-sabor-applied-nutrition-x-50-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/df43d7b3-7e93-45a1-929c-f783cb200a96.jpg"},{"sku":"79182988","name":"Critical Cookie Raspeberry - Applied Nutrition x 17 g","brand":"Applied Nutrition","cat":"Suplemento Nutricional","price":14000,"slug":"critical-cookie-raspeberry-applied-nutrition-x-17-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/df7e5998-5b2f-4930-b1da-e00f0332bb02.jpg"},{"sku":"79182991","name":"Protein Cookie Dough Vainilla Ice Cream - Applied Nutrition x 1000 g","brand":"Applied Nutrition","cat":"Suplemento Nutricional","price":247000,"slug":"protein-cookie-dough-vainilla-ice-cream-applied-nutrition-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/7827b307-f65b-43e7-9267-116b1eee7333.jpg"},{"sku":"79182995","name":"Total War Sour Gummy - Redcon 1 x 355 ml","brand":"Redcon 1","cat":"Suplemento Nutricional","price":19000,"slug":"total-war-sour-gummy-redcon-1-x-355-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/aec91a81-831c-4bb1-acdb-ccbdfeee3308.jpg"},{"sku":"79182997","name":"Colágeno Marino Uva Newhealth - Newhealth x 1000 g","brand":"Newhealth","cat":"Suplemento Nutricional","price":123300,"slug":"colageno-marino-uva-newhealth-newhealth-x-1000-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/e3fa025a-8f7f-430c-b7f6-6e1898fef90d.jpg"},{"sku":"79182992","name":"Critical Whey Vainilla - Applied Nutrition x 825 g","brand":"Applied Nutrition","cat":"Suplemento Nutricional","price":212000,"slug":"critical-whey-vainilla-applied-nutrition-x-825-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/00d33326-a51f-4c2e-bbed-cef34f5c9165.jpg"},{"sku":"79182993","name":"Critical Whey Choco Milkshake - Applied Nutrition x 825 g","brand":"Applied Nutrition","cat":"Suplemento Nutricional","price":212000,"slug":"critical-whey-choco-milkshake-applied-nutrition-x-825-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/c8c6731b-9d56-46ba-9dde-bf9377085c09.jpg"},{"sku":"79182996","name":"Total War Baja Bomb - Redcon 1 x 355 ml","brand":"Redcon 1","cat":"Suplemento Nutricional","price":19000,"slug":"total-war-baja-bomb-redcon-1-x-355-ml","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ee18e077-dd01-4a5e-bfe4-6867ba4a521c.jpg"}]],
+  ["Vitaminas y Complementos Nutricionales",[{"sku":"79180931","name":"Gomitas de Vinagre de Manzana - Mumu x 240 g","brand":"Mumu","cat":"Vitaminas y Complementos Nutricionales","price":109900,"slug":"gomitas-de-vinagre-de-manzana-mumu-x-240-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/ccce7d92-7197-460e-ba02-3483182d75ff.jpg"},{"sku":"79073745","name":"Cúrcuma - Pangea x 30 g","brand":"Pangea","cat":"Vitaminas y Complementos Nutricionales","price":46600,"slug":"curcuma-pangea-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073745_KkvDV96.jpg"},{"sku":"79076807","name":"Melena de León / Hongo en Polvo - Oa Foods x 60 g","brand":"Oa Foods","cat":"Vitaminas y Complementos Nutricionales","price":76300,"slug":"melena-de-leon-hongo-en-polvo-oa-foods-x-60-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79076807.jpg"},{"sku":"79180872","name":"Bacopa - Pangea X 60 Cap","brand":"Pangea","cat":"Vitaminas y Complementos Nutricionales","price":65600,"slug":"bacopa-pangea-x-60-cap","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0eaaabda-33ee-4fe1-ab39-5cf3dd66aa41.jpg"},{"sku":"79073714","name":"Fenogreco - Pangea x 30 g","brand":"Pangea","cat":"Vitaminas y Complementos Nutricionales","price":49200,"slug":"fenogreco-pangea-x-30-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79073714_6dFg4UO.jpg"},{"sku":"79078832","name":"Melatonine 3MG - Healthy America x 120 cap","brand":"Healthy America","cat":"Vitaminas y Complementos Nutricionales","price":51200,"slug":"melatonine-3mg-healthy-america-x-120-cap","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79078832.jpg"},{"sku":"79079303","name":"Glutamine Fast - Vitanas x 300 g","brand":"Vitanas","cat":"Vitaminas y Complementos Nutricionales","price":77000,"slug":"glutamine-fast-vitanas-x-300-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79079303.jpg"},{"sku":"79181923","name":"Capsulas de Cordyceps - Vital Setas x 60 Ud","brand":"Vital Setas","cat":"Vitaminas y Complementos Nutricionales","price":86900,"slug":"capsulas-de-cordyceps-vital-setas-x-60-ud","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/484b3a21-89cb-4064-b464-582a8557538e.jpg"},{"sku":"79181925","name":"Cápsulas de Tremella - Vital Setas x 60 Ud","brand":"Vital Setas","cat":"Vitaminas y Complementos Nutricionales","price":86900,"slug":"capsulas-de-tremella-vital-setas-x-60-ud","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/a83763dc-6877-4662-870f-c21cad7262e8.jpg"},{"sku":"79180641","name":"Chalatec Zinc - Healthy America X 100 Tab","brand":"Healthy America","cat":"Vitaminas y Complementos Nutricionales","price":44500,"slug":"chalatec-zinc-healthy-america-x-100-tab","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/89c24b1e-0cd4-4363-b4b3-21fdffb51750.jpg"},{"sku":"79180869","name":"Nutra C Naranja - Nutramerican X 500 g","brand":"Nutramerican","cat":"Vitaminas y Complementos Nutricionales","price":64990,"slug":"nutra-c-naranja-nutramerican-x-500-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/dcf5bd11-468f-479f-81c1-6b3f7eddec62.jpg"},{"sku":"79180886","name":"Sporogenex - Healthy America X 30 Caps","brand":"Healthy America","cat":"Vitaminas y Complementos Nutricionales","price":70800,"slug":"sporogenex-healthy-america-x-30-caps","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/f641b4f4-5bb3-4e48-aa57-d70fd1a28443.jpg"},{"sku":"79971758","name":"Greens Mix - Macroblends x 360 g","brand":"Macroblends","cat":"Vitaminas y Complementos Nutricionales","price":94900,"slug":"greens-mix-macroblends-x-360-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/79971758.jpg"},{"sku":"79180390","name":"SLM  Soporte Energético Natural - Pwrlab X 30 Cap","brand":"Powerlab","cat":"Vitaminas y Complementos Nutricionales","price":195000,"slug":"slm-soporte-energetico-natural-pwrlab-x-30-cap","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/0010.png"}]],
+  ["Panadería Regular",[{"sku":"89019535","name":"Pan Trenza de Arroz - fithub x 180 g","brand":"Fithub","cat":"Panadería Regular","price":11300,"slug":"pan-trenza-de-arroz-fithub-x-180-g","img":"https://dexter-media-prod-co.s3.amazonaws.com/products/yyy.png"}]]
+]);
+
+function cop(p){return '$'+Math.round(p).toLocaleString('es-CO')}
+const seleccion = new Map();
+
+function getAllProducts() {
+  const all = [];
+  DATA.forEach((prods) => { prods.forEach(p => all.push(p)); });
+  return all;
+}
+
+function buildExcel(prods, filename, withQty) {
+  const n = prods.length;
+  const filas = prods.map(p => {
+    const row = {'Tienda':TIENDA,'Nombre del cliente':CLIENTE,'NIT del cliente':NIT,'SKU':p.sku,'Nombre del producto':p.name,'Categoría':p.cat,'Precio (con IVA)':p.price};
+    if(withQty) row['Cantidad sugerida'] = Math.max(1, Math.ceil(PEDIDO_MIN/n/p.price));
+    return row;
+  });
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(filas);
+  ws['!cols'] = [{wch:28},{wch:30},{wch:16},{wch:14},{wch:45},{wch:22},{wch:18}];
+  if(withQty) ws['!cols'].push({wch:18});
+  XLSX.utils.book_append_sheet(wb, ws, 'Portafolio');
+  XLSX.writeFile(wb, filename);
+}
+
+function descargarTodo() {
+  const all = getAllProducts();
+  buildExcel(all, 'Portafolio_Completo_LinaGalvis_Fithub.xlsx', false);
+}
+
+function descargarSeleccion() {
+  if(!seleccion.size) return;
+  const prods = [...seleccion.values()];
+  buildExcel(prods, 'Preseleccion_LinaGalvis_Fithub.xlsx', true);
+}
+
+function toggleSel(sku, prod) {
+  if(seleccion.has(sku)) seleccion.delete(sku);
+  else seleccion.set(sku, prod);
+  document.querySelectorAll('[data-sku="'+sku+'"]').forEach(el => {
+    el.classList.toggle('selected', seleccion.has(sku));
+    const h = el.querySelector('.sel-hint');
+    if(h) h.textContent = seleccion.has(sku) ? '✓ Seleccionado' : 'Clic para seleccionar';
+  });
+  updateBar();
+}
+
+function updateBar() {
+  const n = seleccion.size;
+  const total = [...seleccion.values()].reduce((s,p)=>s+p.price,0);
+  document.getElementById('sel-count').textContent = n+(n===1?' producto seleccionado':' productos seleccionados');
+  document.getElementById('sel-total').textContent = 'Total: '+cop(total);
+  document.getElementById('sel-bar').classList.toggle('visible', n>0);
+}
+
+function limpiar() {
+  seleccion.clear();
+  document.querySelectorAll('.card.selected').forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll('.sel-hint').forEach(el=>el.textContent='Clic para seleccionar');
+  updateBar();
+}
+
+function makeCard(p) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.sku = p.sku;
+  card.onclick = () => toggleSel(p.sku, p);
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'card-img';
+  const chk = document.createElement('div');
+  chk.className = 'chk'; chk.textContent = '✓';
+  imgWrap.appendChild(chk);
+  if(p.img) {
+    const img = document.createElement('img');
+    img.src = p.img; img.alt = p.name; img.loading = 'lazy';
+    img.onerror = function(){
+      this.style.display='none';
+      const ph=document.createElement('div');ph.className='no-img';
+      ph.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Sin imagen</span>';
+      imgWrap.appendChild(ph);
+    };
+    imgWrap.appendChild(img);
+  }
+  const hint = document.createElement('div');
+  hint.className = 'sel-hint'; hint.textContent = 'Clic para seleccionar';
+  imgWrap.appendChild(hint);
+  card.appendChild(imgWrap);
+  const body = document.createElement('div');
+  body.className = 'card-body';
+  body.innerHTML = `<div class="cb-brand">${p.brand}</div><div class="cb-name">${p.name}</div>
+    <div class="cb-foot"><div><span class="price-l">precio c/IVA</span><span class="price-v">${cop(p.price)}</span></div>
+    <a class="card-link" href="https://fithub.com.co/p/${p.slug}" target="_blank" onclick="event.stopPropagation()">Ver →</a></div>`;
+  card.appendChild(body);
+  return card;
+}
+
+function buildGrid(id, prods) {
+  const el = document.getElementById(id);
+  if(!el || !prods) return;
+  prods.forEach(p => el.appendChild(makeCard(p)));
+}
+
+  buildGrid("g-aceites", DATA.get("Aceites") || []);
+  buildGrid("g-arrocesgranosysemillas", DATA.get("Arroces, Granos y Semillas") || []);
+  buildGrid("g-avena", DATA.get("Avena") || []);
+  buildGrid("g-cafe", DATA.get("Café") || []);
+  buildGrid("g-cerealesygranolas", DATA.get("Cereales y Granolas") || []);
+  buildGrid("g-chocolatesyconfiteria", DATA.get("Chocolates y Confitería") || []);
+  buildGrid("g-enlatados", DATA.get("Enlatados") || []);
+  buildGrid("g-esparcibles", DATA.get("Esparcibles") || []);
+  buildGrid("g-frutossecos", DATA.get("Frutos Secos") || []);
+  buildGrid("g-galleteria", DATA.get("Galletería") || []);
+  buildGrid("g-harinas", DATA.get("Harinas") || []);
+  buildGrid("g-horneados", DATA.get("Horneados") || []);
+  buildGrid("g-mezclasenpolvo", DATA.get("Mezclas en Polvo") || []);
+  buildGrid("g-mielesyendulzantes", DATA.get("Mieles y Endulzantes") || []);
+  buildGrid("g-pastas", DATA.get("Pastas") || []);
+  buildGrid("g-salsasyaderezos", DATA.get("Salsas y Aderezos") || []);
+  buildGrid("g-sazonadores", DATA.get("Sazonadores") || []);
+  buildGrid("g-superalimentos", DATA.get("Super Alimentos") || []);
+  buildGrid("g-teeinfusiones", DATA.get("Té e Infusiones") || []);
+  buildGrid("g-tostadas", DATA.get("Tostadas") || []);
+  buildGrid("g-wrap", DATA.get("Wrap") || []);
+  buildGrid("g-aguas", DATA.get("Aguas") || []);
+  buildGrid("g-bebidasdecafe", DATA.get("Bebidas de Café") || []);
+  buildGrid("g-bebidasfermentadas", DATA.get("Bebidas Fermentadas") || []);
+  buildGrid("g-bebidasvegetales", DATA.get("Bebidas Vegetales") || []);
+  buildGrid("g-energizantes", DATA.get("Energizantes") || []);
+  buildGrid("g-gomashidratantes", DATA.get("Gomas Hidratantes") || []);
+  buildGrid("g-teliquido", DATA.get("Té Líquido") || []);
+  buildGrid("g-chicharrones", DATA.get("Chicharrones") || []);
+  buildGrid("g-chips", DATA.get("Chips") || []);
+  buildGrid("g-crispetas", DATA.get("Crispetas") || []);
+  buildGrid("g-papitas", DATA.get("Papitas") || []);
+  buildGrid("g-platanitos", DATA.get("Platanitos") || []);
+  buildGrid("g-rosquitas", DATA.get("Rosquitas") || []);
+  buildGrid("g-snacks", DATA.get("Snacks") || []);
+  buildGrid("g-yucasnachos", DATA.get("Yucas & Nachos") || []);
+  buildGrid("g-esparciblesrefrigerados", DATA.get("Esparcibles Refrigerados") || []);
+  buildGrid("g-quesosregulares", DATA.get("Quesos Regulares") || []);
+  buildGrid("g-quesosveganos", DATA.get("Quesos Veganos") || []);
+  buildGrid("g-yoguresregulares", DATA.get("Yogures Regulares") || []);
+  buildGrid("g-yogurtvegano", DATA.get("Yogurt Vegano") || []);
+  buildGrid("g-arepascongeladas", DATA.get("Arepas Congeladas") || []);
+  buildGrid("g-carnesdeorigenvegetal", DATA.get("Carnes de Origen Vegetal") || []);
+  buildGrid("g-comidapreparada", DATA.get("Comida Preparada") || []);
+  buildGrid("g-heladosypaletas", DATA.get("Helados y Paletas") || []);
+  buildGrid("g-pastapizza", DATA.get("Pasta & Pizza") || []);
+  buildGrid("g-pulpasdefrutas", DATA.get("Pulpas de Frutas") || []);
+  buildGrid("g-carnesblancas", DATA.get("Carnes Blancas") || []);
+  buildGrid("g-carnesrojas", DATA.get("Carnes Rojas") || []);
+  buildGrid("g-embutidos", DATA.get("Embutidos") || []);
+  buildGrid("g-pescadomariscos", DATA.get("Pescado & Mariscos") || []);
+  buildGrid("g-aminoacidos", DATA.get("Amino Ácidos") || []);
+  buildGrid("g-barrasdeproteinas", DATA.get("Barras de Proteínas") || []);
+  buildGrid("g-colageno", DATA.get("Colágeno") || []);
+  buildGrid("g-creatinas", DATA.get("Creatinas") || []);
+  buildGrid("g-proteinasenpolvo", DATA.get("Proteínas en Polvo") || []);
+  buildGrid("g-snackproteicos", DATA.get("Snack Proteícos") || []);
+  buildGrid("g-suplementodietario", DATA.get("Suplemento Dietario") || []);
+  buildGrid("g-suplementonutricional", DATA.get("Suplemento Nutricional") || []);
+  buildGrid("g-vitaminasycomplementosnutricionales", DATA.get("Vitaminas y Complementos Nutricionales") || []);
+  buildGrid("g-panaderiaregular", DATA.get("Panadería Regular") || []);
+
+const fams = document.querySelectorAll('.fam-group[id]');
+const navLinks = document.querySelectorAll('.nav-a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  fams.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id});
+  navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+</body>
+</html>
